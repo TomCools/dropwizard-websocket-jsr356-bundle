@@ -1,10 +1,19 @@
 package be.tomcools.dropwizard.websocket;
 
+import io.dropwizard.jetty.MutableServletContextHandler;
 import io.dropwizard.setup.Environment;
-import org.apache.commons.lang3.NotImplementedException;
+import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.servlet.ServletContextHandler;
 
 public class WebsocketHandlerFactory {
+    private ServerInstanceCollector serverCollector = new ServerInstanceCollector();
+
     public WebsocketHandler forEnvironment(Environment environment) {
-        throw new NotImplementedException("This class it not yet implemented");
+        MutableServletContextHandler applicationContext = environment.getApplicationContext();
+        Server server = serverCollector.findServerInstance(environment);
+
+        applicationContext.setServer(server);
+
+        return null;
     }
 }
