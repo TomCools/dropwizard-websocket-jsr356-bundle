@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>be.tomcools</groupId>
+    <artifactId>dropwizard-websocket-jee7-bundle</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <name>dropwizard-websocket-jee7-bundle</name>
+    <description>Dropwizard bundle to enable the use of Java Websockets.</description>
+
+    <scm>
+        <url>https://github.com/TomCools/dropwizard-websocket-jee7-bundle</url>
+        <connection>scm:git:git@github.com:TomCools/dropwizard-websocket-jee7-bundle.git</connection>
+        <developerConnection>scm:git:git@github.com:TomCools/dropwizard-websocket-jee7-bundle.git</developerConnection>
+    </scm>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <dropwizard.version>0.9.0-SNAPSHOT</dropwizard.version>
+        <jetty.version>9.2.9.v20150224</jetty.version>
+    </properties>
+
+    <dependencies>
+        <!-- Dropwizard -->
+        <dependency>
+            <groupId>io.dropwizard</groupId>
+            <artifactId>dropwizard-core</artifactId>
+            <version>${dropwizard.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.dropwizard</groupId>
+            <artifactId>dropwizard-testing</artifactId>
+            <version>${dropwizard.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- JUnit -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Jetty -->
+        <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-servlet</artifactId>
+            <version>${jetty.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+</project>

@@ -1,0 +1,21 @@
+# IntelliJ Files
+.idea/
+*.ipr
+*.iws
+*.iml
+
+# Eclipse Files
+.classpath
+.project
+
+# Build outputs
+target/
+reports/
+
+# Vagrant outputs
+.vagrant
+*.rpm
+
+# OS hidden files
+.DS_Store
+atlassian-ide-plugin.xml
