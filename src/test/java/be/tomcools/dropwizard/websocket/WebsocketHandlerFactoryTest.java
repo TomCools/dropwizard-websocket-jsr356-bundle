@@ -9,6 +9,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -18,6 +19,9 @@ public class WebsocketHandlerFactoryTest {
 
     @Mock
     private ServerInstanceCollector serverInstanceCollector;
+
+    @Mock
+    private WebsocketContainerInitializer websocketContainerInitializer;
 
     @Mock
     private Server server;
@@ -43,6 +47,20 @@ public class WebsocketHandlerFactoryTest {
         sut.forEnvironment(environment);
 
         verify(environment.getApplicationContext()).setServer(server);
+    }
+
+    @Test
+    public void applicationContextIsPassedToContainerInitializer() {
+        sut.forEnvironment(environment);
+
+        verify(websocketContainerInitializer).initialize(environment.getApplicationContext());
+    }
+
+    @Test
+    public void canCreateWebsocketHandlerForEnvironment() {
+        WebsocketHandler websocketHandler = sut.forEnvironment(environment);
+
+        assertThat("WebsocketHandler was null", websocketHandler != null);
     }
 
 }

@@ -3,10 +3,11 @@ package be.tomcools.dropwizard.websocket;
 import io.dropwizard.jetty.MutableServletContextHandler;
 import io.dropwizard.setup.Environment;
 import org.eclipse.jetty.server.Server;
-import org.eclipse.jetty.servlet.ServletContextHandler;
+import org.eclipse.jetty.websocket.jsr356.server.ServerContainer;
 
 public class WebsocketHandlerFactory {
     private ServerInstanceCollector serverCollector = new ServerInstanceCollector();
+    private WebsocketContainerInitializer containerInitializer = new WebsocketContainerInitializer();
 
     public WebsocketHandler forEnvironment(Environment environment) {
         MutableServletContextHandler applicationContext = environment.getApplicationContext();
@@ -14,6 +15,8 @@ public class WebsocketHandlerFactory {
 
         applicationContext.setServer(server);
 
-        return null;
+        ServerContainer container = containerInitializer.initialize(applicationContext);
+
+        return new WebsocketHandler(container);
     }
 }
