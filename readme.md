@@ -14,7 +14,7 @@ How does the bundle work?
 ---
 Add the maven dependency: 
 
-    Available after first release
+    Currently this is work in progress.
 
 Add the WebsocketBundle object to the Application.class and add the Endpoint classes you want to load:
 
@@ -35,7 +35,11 @@ Add the WebsocketBundle object to the Application.class and add the Endpoint cla
 
 Start your server. During startup, all registered Websocket-endpoints will be logged in the same way other resources are logged.
 
-    Example to be added
+    INFO  [2015-05-08 22:07:22,980] be.tomcools.dropwizard.websocket.handling.WebsocketContainer: Registered websocket endpoints: 
+    
+    	GET		/pingpong (be.tomcools.dropwizard.websocket.integrationtest.annotatedjavaee.PingPongServerEndpoint)
+    
+
     
 Need help? Found an issue? Want extra functionality?
 ---

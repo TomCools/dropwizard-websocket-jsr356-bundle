@@ -25,7 +25,7 @@ public class WebsocketContainer {
         for (Endpoint endpoint : endpoints) {
             try {
                 serverContainer.addEndpoint(endpoint.getEndpointClass());
-                endpointsAdded.append("\t").append(endpoint).append(System.lineSeparator());
+                endpointsAdded.append(endpoint.toLogString()).append(System.lineSeparator());
             } catch (DeploymentException e) {
                 LOGGER.error("Could not add websocket endpoint {} to the deployment.", endpoint, e);
             }

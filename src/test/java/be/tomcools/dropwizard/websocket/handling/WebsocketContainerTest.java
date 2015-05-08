@@ -32,8 +32,8 @@ public class WebsocketContainerTest {
     @Test
     public void whenRegisterEndpointsIsCalledAddsEndpointsToContainer() throws DeploymentException {
         Endpoints endpoints = new Endpoints();
-        endpoints.add(new Endpoint(Object.class, EndpointType.JAVA_SERVER_ENDPOINT));
-        endpoints.add(new Endpoint(String.class, EndpointType.JAVA_SERVER_ENDPOINT));
+        endpoints.add(Endpoint.builder().endpointClass(Object.class).type(EndpointType.JAVA_ANNOTATED_ENDPOINT).build());
+        endpoints.add(Endpoint.builder().endpointClass(String.class).type(EndpointType.JAVA_ANNOTATED_ENDPOINT).build());
 
         sut.registerEndpoints(endpoints);
 
@@ -52,8 +52,8 @@ public class WebsocketContainerTest {
     @Test
     public void whenDeploymentExceptionOccursWhenTryingToLoadAClassStillAddsOthers() throws DeploymentException {
         Endpoints endpoints = new Endpoints();
-        endpoints.add(new Endpoint(Object.class, EndpointType.JAVA_SERVER_ENDPOINT));
-        endpoints.add(new Endpoint(String.class, EndpointType.JAVA_SERVER_ENDPOINT));
+        endpoints.add(Endpoint.builder().endpointClass(Object.class).type(EndpointType.JAVA_ANNOTATED_ENDPOINT).build());
+        endpoints.add(Endpoint.builder().endpointClass(String.class).type(EndpointType.JAVA_ANNOTATED_ENDPOINT).build());
         doThrow(DeploymentException.class).when(container).addEndpoint(Object.class);
 
         sut.registerEndpoints(endpoints);

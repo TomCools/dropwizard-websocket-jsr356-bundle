@@ -1,13 +1,15 @@
 package be.tomcools.dropwizard.websocket.registration;
 
+import lombok.Builder;
+import lombok.Value;
+
+@Builder
+@Value
 public class Endpoint {
     private Class<?> endpointClass;
     private EndpointType type;
+    private String path;
 
-    public Endpoint(Class<?> endpointClass, EndpointType type) {
-        this.endpointClass = endpointClass;
-        this.type = type;
-    }
 
     public Class<?> getEndpointClass() {
         return endpointClass;
@@ -19,5 +21,9 @@ public class Endpoint {
                 "Class=" + endpointClass.getCanonicalName() +
                 ", Type=" + type +
                 '}';
+    }
+
+    public String toLogString() {
+        return String.format("\tGET\t\t%s (%s)", path, endpointClass.getName());
     }
 }
