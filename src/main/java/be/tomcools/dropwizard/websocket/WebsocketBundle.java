@@ -19,7 +19,6 @@ public class WebsocketBundle implements ConfiguredBundle {
         handler.addEndpoint(aClass);
     }
 
-    @Override
     public void run(Configuration configuration, Environment environment) throws Exception {
         handler = handlerFactory.forEnvironment(environment);
         ServerFactory serverFactory = configuration.getServerFactory();
@@ -30,5 +29,10 @@ public class WebsocketBundle implements ConfiguredBundle {
     @Override
     public void initialize(Bootstrap bootstrap) {
 
+    }
+
+    @Override
+    public void run(Object configuration, Environment environment) throws Exception {
+        run((Configuration) configuration, environment);
     }
 }
