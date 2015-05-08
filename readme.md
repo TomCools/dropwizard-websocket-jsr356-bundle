@@ -1,5 +1,7 @@
 Websocket (JSR 356) bundle for Dropwizard
 ==========
+[![Build Status](https://travis-ci.org/TomCools/dropwizard-websocket-jee7-bundle.png?branch=master)](https://travis-ci.org/TomCools/dropwizard-websocket-jee7-bundle)
+
 *Adding some Websocket-magic to Dropwizard.*
 
 This repository contains a Bundle to be used with Dropwizard.
