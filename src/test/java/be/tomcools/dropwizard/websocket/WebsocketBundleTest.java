@@ -1,6 +1,7 @@
 package be.tomcools.dropwizard.websocket;
 
-import io.dropwizard.Bundle;
+import io.dropwizard.Configuration;
+import io.dropwizard.ConfiguredBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import org.junit.Before;
@@ -16,6 +17,7 @@ import static org.mockito.Mockito.*;
 @RunWith(MockitoJUnitRunner.class)
 public class WebsocketBundleTest {
     private final Environment environment = mock(Environment.class, RETURNS_DEEP_STUBS);
+    private final Configuration configuration = mock(Configuration.class, RETURNS_DEEP_STUBS);
 
     @Mock
     private Bootstrap bootstrap;
@@ -35,8 +37,8 @@ public class WebsocketBundleTest {
     }
 
     @Test
-    public void websocketBundleImplementsBundleInterface() {
-        assertTrue(Bundle.class.isAssignableFrom(WebsocketBundle.class));
+    public void websocketBundleImplementsConfiguredBundleInterface() {
+        assertTrue(ConfiguredBundle.class.isAssignableFrom(WebsocketBundle.class));
     }
 
     @Test
@@ -47,17 +49,17 @@ public class WebsocketBundleTest {
     }
 
     @Test
-    public void whenRunIsCalledRetrievesHandlerInstanceFromFactoryForTheSuppliedEnvironment() {
-        sut.run(environment);
+    public void whenRunIsCalledRetrievesHandlerInstanceFromFactoryForTheSuppliedEnvironment() throws Exception {
+        sut.run(configuration, environment);
 
         verify(websocketHandlerFactory).forEnvironment(environment);
     }
 
     @Test
-    public void whenAddEndpointIsCalledDelegatesCallToWebsocketHandler() {
+    public void whenAddEndpointIsCalledDelegatesCallToWebsocketHandler() throws Exception {
         Class<?> testClass = this.getClass();
         sut.initialize(bootstrap);
-        sut.run(environment);
+        sut.run(configuration, environment);
 
         sut.addEndpoint(testClass);
 

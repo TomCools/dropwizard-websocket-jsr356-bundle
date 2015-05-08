@@ -1,6 +1,12 @@
 package be.tomcools.dropwizard.websocket;
 
-import org.eclipse.jetty.websocket.jsr356.server.ServerContainer;
+import be.tomcools.dropwizard.websocket.handling.WebsocketContainer;
+import be.tomcools.dropwizard.websocket.handling.WebsocketContainerInitializer;
+import be.tomcools.dropwizard.websocket.registration.EndpointRegistration;
+import be.tomcools.dropwizard.websocket.registration.Endpoints;
+import io.dropwizard.jetty.MutableServletContextHandler;
+import io.dropwizard.setup.Environment;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -10,28 +16,59 @@ import org.mockito.runners.MockitoJUnitRunner;
 import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
 
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 
 @RunWith(MockitoJUnitRunner.class)
 public class WebsocketHandlerTest {
 
+    private final Environment environment = mock(Environment.class, RETURNS_DEEP_STUBS);
+
     @Mock
-    private ServerContainer serverContainer;
+    private EndpointRegistration endpointRegistration;
+
+    @Mock
+    private WebsocketContainerInitializer containerInitializer;
+
+    @Mock
+    private WebsocketContainer container;
+
+    @Mock
+    private Endpoints endpoints;
 
     @InjectMocks
     private WebsocketHandler sut;
 
-    @Test
-    public void canConstructHandlerWithServerContainer() {
-        new WebsocketHandler(serverContainer);
+    @Before
+    public void init() {
+        when(containerInitializer.initialize(any(MutableServletContextHandler.class))).thenReturn(container);
+        when(endpointRegistration.getRegisteredEndpoints()).thenReturn(endpoints);
     }
 
     @Test
-    public void whenAddEndpointIsCalledPassesObjectToServerContainer() throws DeploymentException {
+    public void canConstructHandlerWithEnvironment() {
+        new WebsocketHandler(environment);
+    }
+
+    @Test
+    public void whenAddEndpointIsCalledPassesObjectToEndpointRegistration() {
         sut.addEndpoint(TestEndpoint.class);
 
-        verify(serverContainer).addEndpoint(TestEndpoint.class);
+        verify(endpointRegistration).add(TestEndpoint.class);
+    }
+
+    @Test
+    public void whenInitializeIsCalled_InitializesWebsocketContainer() {
+        sut.initialize();
+
+        verify(containerInitializer).initialize(environment.getApplicationContext());
+    }
+
+    @Test
+    public void whenInitializeIsCalled_addsRegisteredEndpointsToWebsocketContainer() {
+        sut.initialize();
+
+        verify(container).registerEndpoints(endpoints);
     }
 
     @ServerEndpoint("/chat")
