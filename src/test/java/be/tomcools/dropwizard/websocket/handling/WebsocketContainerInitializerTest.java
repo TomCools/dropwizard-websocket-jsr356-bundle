@@ -1,8 +1,7 @@
-package be.tomcools.dropwizard.websocket;
+package be.tomcools.dropwizard.websocket.handling;
 
 import io.dropwizard.jetty.MutableServletContextHandler;
 import org.eclipse.jetty.server.Server;
-import org.eclipse.jetty.websocket.jsr356.server.ServerContainer;
 import org.eclipse.jetty.websocket.server.WebSocketUpgradeFilter;
 import org.junit.Before;
 import org.junit.Test;
@@ -36,7 +35,7 @@ public class WebsocketContainerInitializerTest {
 
     @Test
     public void canConstructServerContainerForServletHandlerContext() {
-        ServerContainer container = sut.initialize(servletContextHandler);
+        WebsocketContainer container = sut.initialize(servletContextHandler);
 
         assertNotNull(container);
     }
@@ -44,7 +43,7 @@ public class WebsocketContainerInitializerTest {
     @Test(expected = IllegalStateException.class)
     public void whenSomethingGoesWrongDuringInitializeThrowsIllegalStateException() {
         when(servletContextHandler.getServer()).thenThrow(ServletException.class);
-        ServerContainer container = sut.initialize(servletContextHandler);
+        WebsocketContainer container = sut.initialize(servletContextHandler);
 
         assertNotNull(container);
     }
