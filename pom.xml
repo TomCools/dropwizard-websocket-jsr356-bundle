@@ -10,6 +10,19 @@
 
     <name>dropwizard-websocket-jee7-bundle</name>
     <description>Dropwizard bundle to enable the use of Java Websockets.</description>
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+    <developers>
+        <developer>
+            <name>Tom Cools</name>
+            <email>tom.cools@live.be</email>
+            <url>http://tomcools.be</url>
+        </developer>
+    </developers>
 
     <scm>
         <url>https://github.com/TomCools/dropwizard-websocket-jee7-bundle</url>
