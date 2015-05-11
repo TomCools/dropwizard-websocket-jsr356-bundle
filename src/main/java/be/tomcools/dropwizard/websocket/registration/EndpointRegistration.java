@@ -42,7 +42,7 @@ public class EndpointRegistration {
         if (endpointClass.isAnnotationPresent(ServerEndpoint.class)) {
             return endpointClass.getAnnotation(ServerEndpoint.class).value();
         } else {
-            throw new IllegalArgumentException(String.format("@ServerEndpoint annotation not found on Websocket-class: '%s'", endpointClass));
+            throw new IllegalArgumentException(String.format("@ServerEndpoint annotation not found on Websocket-class: '%s'. Either annotate the class or register it as a programmatic endpoint using ServerEndpointConfig.class", endpointClass));
         }
     }
 
