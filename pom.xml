@@ -155,6 +155,7 @@
                     <useReleaseProfile>false</useReleaseProfile>
                     <releaseProfiles>release</releaseProfiles>
                     <goals>deploy</goals>
+                    <mavenHome>I:\tools\maven</mavenHome>
                 </configuration>
             </plugin>
         </plugins>
