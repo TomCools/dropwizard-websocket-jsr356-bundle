@@ -50,23 +50,19 @@ public class EndpointRegistrationTest {
             assertThat(endpoint.getEndpointClass().getCanonicalName(), is(ProgrammaticEndpoint.class.getCanonicalName()));
             assertThat(endpoint.getPath(), is("/path"));
             assertThat(endpoint.getType(), is(EndpointType.JAVA_PROGRAMMATIC_ENDPOINT));
-            assertThat(((EndpointProgrammaticJava)endpoint).getConfig(), is(config));
+            assertThat(((EndpointProgrammaticJava) endpoint).getConfig(), is(config));
         }
-    }
-
-    @Test
-    public void addingTheSameEndpointTwiceOnlyAddsItOnce() {
-        registration.add(AnnotatedEndpoint.class);
-        registration.add(AnnotatedEndpoint.class);
-
-        Endpoints endpoints = registration.getRegisteredEndpoints();
-
-        assertThat(endpoints.size(), equalTo(1));
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void ifSuppliedClassDoesnotHaveServerEndpointAnnotationThrowsIllegalArgumentException() {
         registration.add(Object.class);
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void addingTwoEndpointsWithSamePathCausesException() {
+        registration.add(AnnotatedEndpoint.class);
+        registration.add(AnnotatedEndpoint.class);
     }
 
     @ServerEndpoint("/chat")

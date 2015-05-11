@@ -2,6 +2,7 @@ package be.tomcools.dropwizard.websocket.registration;
 
 import be.tomcools.dropwizard.websocket.registration.endpointtypes.EndpointAnnotatedJava;
 import be.tomcools.dropwizard.websocket.registration.endpointtypes.EndpointProgrammaticJava;
+import com.google.common.base.Optional;
 
 import javax.websocket.server.ServerEndpoint;
 import javax.websocket.server.ServerEndpointConfig;
@@ -16,7 +17,7 @@ public class EndpointRegistration {
 
         Endpoint endpoint = new EndpointAnnotatedJava(endpointClass, endpointPath);
 
-        endpoints.add(endpoint);
+        addEndpoint(endpoint);
     }
 
     public void add(ServerEndpointConfig serverEndpointConfig) {
@@ -24,7 +25,16 @@ public class EndpointRegistration {
 
         Endpoint endpoint = new EndpointProgrammaticJava(serverEndpointConfig);
 
-        endpoints.add(endpoint);
+        addEndpoint(endpoint);
+    }
+
+    private void addEndpoint(Endpoint endpoint) {
+        Optional<Endpoint> existingEndpointWithSamePath = endpoints.endpointForPath(endpoint.getPath());
+        if (existingEndpointWithSamePath.isPresent()) {
+            throw new IllegalStateException("Registering endpoint " + endpoint + " failed: Another endpoint with the same path already registered: " + existingEndpointWithSamePath.get());
+        } else {
+            endpoints.add(endpoint);
+        }
     }
 
     // move to sort of ruleEngine

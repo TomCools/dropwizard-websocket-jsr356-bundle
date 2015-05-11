@@ -30,8 +30,8 @@ public abstract class Endpoint {
     @Override
     public String toString() {
         return "Endpoint{" +
-                "Class=" + endpointClass.getCanonicalName() +
-                ", Type=" + type +
+                "endpointClass=" + endpointClass +
+                ", path='" + path + '\'' +
                 '}';
     }
 
