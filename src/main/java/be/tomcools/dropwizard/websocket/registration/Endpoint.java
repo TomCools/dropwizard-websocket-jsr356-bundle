@@ -1,15 +1,13 @@
 package be.tomcools.dropwizard.websocket.registration;
 
-import lombok.Builder;
-import lombok.Value;
+import be.tomcools.dropwizard.websocket.registration.endpointtypes.EndpointType;
+import lombok.AllArgsConstructor;
 
-@Builder
-@Value
-public class Endpoint {
-    private Class<?> endpointClass;
-    private EndpointType type;
-    private String path;
-
+@AllArgsConstructor
+public abstract class Endpoint {
+    protected Class<?> endpointClass;
+    protected EndpointType type;
+    protected String path;
 
     public Class<?> getEndpointClass() {
         return endpointClass;

@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.websocket.DeploymentException;
 import javax.websocket.server.ServerContainer;
+import javax.websocket.server.ServerEndpointConfig;
 
 public class WebsocketContainer {
     private static final Logger LOGGER = LoggerFactory.getLogger(WebsocketContainer.class);
@@ -18,13 +19,13 @@ public class WebsocketContainer {
     }
 
     public void registerEndpoints(Endpoints endpoints) {
-        StringBuilder endpointsAdded = new StringBuilder("Registered websocket endpoints: ")
+        StringBuilder endpointsAdded = new StringBuilder("Registered websocket endpointtypes: ")
                 .append(System.lineSeparator())
                 .append(System.lineSeparator());
 
         for (Endpoint endpoint : endpoints) {
             try {
-                serverContainer.addEndpoint(endpoint.getEndpointClass());
+                register(endpoint);
                 endpointsAdded.append(endpoint.toLogString()).append(System.lineSeparator());
             } catch (DeploymentException e) {
                 LOGGER.error("Could not add websocket endpoint {} to the deployment.", endpoint, e);
@@ -32,5 +33,19 @@ public class WebsocketContainer {
         }
 
         LOGGER.info(endpointsAdded.toString());
+    }
+
+    private void register(Endpoint endpoint) throws DeploymentException {
+        switch (endpoint.getType()) {
+            case JAVA_ANNOTATED_ENDPOINT:
+                serverContainer.addEndpoint(endpoint.getEndpointClass());
+                break;
+            case JAVA_PROGRAMMATIC_ENDPOINT:
+                ServerEndpointConfig config = ServerEndpointConfig.Builder.create(endpoint.getEndpointClass(), endpoint.getPath()).build();
+                serverContainer.addEndpoint(config);
+                break;
+            default:
+                throw new DeploymentException(String.format("No registering logic has been defined for endpoint type: %s", endpoint.getType()));
+        }
     }
 }

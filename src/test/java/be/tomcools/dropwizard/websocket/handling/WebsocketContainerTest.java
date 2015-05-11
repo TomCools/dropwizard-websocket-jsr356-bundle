@@ -1,7 +1,7 @@
 package be.tomcools.dropwizard.websocket.handling;
 
 import be.tomcools.dropwizard.websocket.registration.Endpoint;
-import be.tomcools.dropwizard.websocket.registration.EndpointType;
+import be.tomcools.dropwizard.websocket.registration.endpointtypes.EndpointType;
 import be.tomcools.dropwizard.websocket.registration.Endpoints;
 import org.junit.Test;
 import org.junit.runner.RunWith;

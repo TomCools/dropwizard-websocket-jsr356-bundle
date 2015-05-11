@@ -7,6 +7,8 @@ import io.dropwizard.server.ServerFactory;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 
+import javax.websocket.server.ServerEndpointConfig;
+
 public class WebsocketBundle implements ConfiguredBundle {
     private WebsocketHandlerFactory handlerFactory = new WebsocketHandlerFactory();
 
@@ -17,6 +19,10 @@ public class WebsocketBundle implements ConfiguredBundle {
 
     public void addEndpoint(Class<?> aClass) {
         handler.addEndpoint(aClass);
+    }
+
+    public void addEndpoint(ServerEndpointConfig serverEndpointConfig) {
+        handler.addEndpoint(serverEndpointConfig);
     }
 
     public void run(Configuration configuration, Environment environment) throws Exception {

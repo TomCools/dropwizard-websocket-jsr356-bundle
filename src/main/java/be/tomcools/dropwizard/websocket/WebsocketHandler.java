@@ -5,6 +5,8 @@ import be.tomcools.dropwizard.websocket.handling.WebsocketContainerInitializer;
 import be.tomcools.dropwizard.websocket.registration.EndpointRegistration;
 import io.dropwizard.setup.Environment;
 
+import javax.websocket.server.ServerEndpointConfig;
+
 public class WebsocketHandler {
     private EndpointRegistration endpointRegistration;
     private Environment environment;
@@ -24,8 +26,14 @@ public class WebsocketHandler {
         this.endpointRegistration.add(endpointClass);
     }
 
+    public void addEndpoint(ServerEndpointConfig serverEndpointConfig) {
+        this.endpointRegistration.add(serverEndpointConfig);
+    }
+
     public void initialize() {
         WebsocketContainer serverContainer = containerInitializer.initialize(environment.getApplicationContext());
         serverContainer.registerEndpoints(endpointRegistration.getRegisteredEndpoints());
     }
+
+
 }
