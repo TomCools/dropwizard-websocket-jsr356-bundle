@@ -1,12 +1,17 @@
 package be.tomcools.dropwizard.websocket.registration;
 
+import be.tomcools.dropwizard.websocket.registration.endpointtypes.EndpointProgrammaticJava;
+import be.tomcools.dropwizard.websocket.registration.endpointtypes.EndpointType;
 import org.junit.Test;
 
+import javax.websocket.Endpoint;
 import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
+import javax.websocket.server.ServerEndpointConfig;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.Is.is;
 
 public class EndpointRegistrationTest {
 
@@ -14,7 +19,7 @@ public class EndpointRegistrationTest {
 
     @Test
     public void canAddAndReturnRegisteredEndpoints() {
-        registration.add(TestEndpoint.class);
+        registration.add(AnnotatedEndpoint.class);
 
         Endpoints endpoints = registration.getRegisteredEndpoints();
 
@@ -22,9 +27,37 @@ public class EndpointRegistrationTest {
     }
 
     @Test
+    public void addingAnnotatedEndpointCorrectlyRegistersIt() {
+        registration.add(AnnotatedEndpoint.class);
+
+        Endpoints endpoints = registration.getRegisteredEndpoints();
+
+        for (be.tomcools.dropwizard.websocket.registration.Endpoint endpoint : endpoints) {
+            assertThat(endpoint.getEndpointClass().getCanonicalName(), is(AnnotatedEndpoint.class.getCanonicalName()));
+            assertThat(endpoint.getPath(), is("/chat"));
+            assertThat(endpoint.getType(), is(EndpointType.JAVA_ANNOTATED_ENDPOINT));
+        }
+    }
+
+    @Test
+    public void addingProgrammaticEndpointCorrectlyRegistersIt() {
+        ServerEndpointConfig config = ServerEndpointConfig.Builder.create(ProgrammaticEndpoint.class, "/path").build();
+        registration.add(config);
+
+        Endpoints endpoints = registration.getRegisteredEndpoints();
+
+        for (be.tomcools.dropwizard.websocket.registration.Endpoint endpoint : endpoints) {
+            assertThat(endpoint.getEndpointClass().getCanonicalName(), is(ProgrammaticEndpoint.class.getCanonicalName()));
+            assertThat(endpoint.getPath(), is("/path"));
+            assertThat(endpoint.getType(), is(EndpointType.JAVA_PROGRAMMATIC_ENDPOINT));
+            assertThat(((EndpointProgrammaticJava)endpoint).getConfig(), is(config));
+        }
+    }
+
+    @Test
     public void addingTheSameEndpointTwiceOnlyAddsItOnce() {
-        registration.add(TestEndpoint.class);
-        registration.add(TestEndpoint.class);
+        registration.add(AnnotatedEndpoint.class);
+        registration.add(AnnotatedEndpoint.class);
 
         Endpoints endpoints = registration.getRegisteredEndpoints();
 
@@ -37,7 +70,7 @@ public class EndpointRegistrationTest {
     }
 
     @ServerEndpoint("/chat")
-    class TestEndpoint {
+    class AnnotatedEndpoint {
         @OnOpen
         public void open(Session session) {
         }
@@ -52,6 +85,13 @@ public class EndpointRegistrationTest {
 
         @OnMessage
         public void handleMessage(String message, Session session) {
+        }
+    }
+
+    class ProgrammaticEndpoint extends Endpoint {
+        @Override
+        public void onOpen(Session session, EndpointConfig endpointConfig) {
+            //To change body of implemented methods use File | Settings | File Templates.
         }
     }
 }

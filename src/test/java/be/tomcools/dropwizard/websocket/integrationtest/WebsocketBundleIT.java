@@ -1,6 +1,5 @@
-package be.tomcools.dropwizard.websocket;
+package be.tomcools.dropwizard.websocket.integrationtest;
 
-import be.tomcools.dropwizard.websocket.integrationtest.IntegrationTestApplication;
 import be.tomcools.dropwizard.websocket.integrationtest.annotatedjavaee.PingPongClientEndpoint;
 import org.junit.Before;
 import org.junit.Test;
@@ -9,13 +8,11 @@ import javax.websocket.ContainerProvider;
 import javax.websocket.DeploymentException;
 import javax.websocket.Session;
 import javax.websocket.WebSocketContainer;
-
 import java.io.IOException;
 import java.net.URI;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.fail;
 
 public class WebsocketBundleIT {
     Thread server;
@@ -44,7 +41,6 @@ public class WebsocketBundleIT {
         sendMessage(session, "ping");
 
         assertThat(session.isOpen(), is(true));
-        assertThat(server.isAlive(), is(true));
     }
 
     private void sendMessage(final Session session, final String message) throws IOException, InterruptedException {

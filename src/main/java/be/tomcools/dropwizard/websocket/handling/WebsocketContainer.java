@@ -2,12 +2,12 @@ package be.tomcools.dropwizard.websocket.handling;
 
 import be.tomcools.dropwizard.websocket.registration.Endpoint;
 import be.tomcools.dropwizard.websocket.registration.Endpoints;
+import be.tomcools.dropwizard.websocket.registration.endpointtypes.EndpointProgrammaticJava;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.websocket.DeploymentException;
 import javax.websocket.server.ServerContainer;
-import javax.websocket.server.ServerEndpointConfig;
 
 public class WebsocketContainer {
     private static final Logger LOGGER = LoggerFactory.getLogger(WebsocketContainer.class);
@@ -41,8 +41,7 @@ public class WebsocketContainer {
                 serverContainer.addEndpoint(endpoint.getEndpointClass());
                 break;
             case JAVA_PROGRAMMATIC_ENDPOINT:
-                ServerEndpointConfig config = ServerEndpointConfig.Builder.create(endpoint.getEndpointClass(), endpoint.getPath()).build();
-                serverContainer.addEndpoint(config);
+                serverContainer.addEndpoint(((EndpointProgrammaticJava) endpoint).getConfig());
                 break;
             default:
                 throw new DeploymentException(String.format("No registering logic has been defined for endpoint type: %s", endpoint.getType()));

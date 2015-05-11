@@ -15,6 +15,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
+import javax.websocket.server.ServerEndpointConfig;
 
 import static org.mockito.Mockito.*;
 
@@ -51,10 +52,18 @@ public class WebsocketHandlerTest {
     }
 
     @Test
-    public void whenAddEndpointIsCalledPassesObjectToEndpointRegistration() {
+    public void whenAddAnnotatedEndpointIsCalledPassesObjectToEndpointRegistration() {
         sut.addEndpoint(TestEndpoint.class);
 
         verify(endpointRegistration).add(TestEndpoint.class);
+    }
+
+    @Test
+    public void whenAddProgrammaticEndpointIsCalledPassesObjectToEndpointRegistration() {
+        ServerEndpointConfig config = ServerEndpointConfig.Builder.create(TestEndpoint.class, "/path").build();
+        sut.addEndpoint(config);
+
+        verify(endpointRegistration).add(config);
     }
 
     @Test

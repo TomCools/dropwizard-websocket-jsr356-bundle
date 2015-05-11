@@ -1,6 +1,7 @@
 package be.tomcools.dropwizard.websocket.registration;
 
-import be.tomcools.dropwizard.websocket.registration.endpointtypes.EndpointType;
+import be.tomcools.dropwizard.websocket.registration.endpointtypes.EndpointAnnotatedJava;
+import be.tomcools.dropwizard.websocket.registration.endpointtypes.EndpointProgrammaticJava;
 
 import javax.websocket.server.ServerEndpoint;
 import javax.websocket.server.ServerEndpointConfig;
@@ -11,11 +12,9 @@ public class EndpointRegistration {
     public void add(Class<?> endpointClass) {
         //TODO implement checks on Class; (has annotation/interface)
 
-        Endpoint endpoint = Endpoint.builder()
-                .endpointClass(endpointClass)
-                .type(EndpointType.JAVA_ANNOTATED_ENDPOINT)
-                .path(determineAnnotatedEndpointPath(endpointClass))
-                .build();
+        String endpointPath = determineAnnotatedEndpointPath(endpointClass);
+
+        Endpoint endpoint = new EndpointAnnotatedJava(endpointClass, endpointPath);
 
         endpoints.add(endpoint);
     }
@@ -23,11 +22,7 @@ public class EndpointRegistration {
     public void add(ServerEndpointConfig serverEndpointConfig) {
         //TODO implement checks on Class; (has annotation/interface)
 
-        Endpoint endpoint = Endpoint.builder()
-                .endpointClass(serverEndpointConfig.getEndpointClass())
-                .type(EndpointType.JAVA_PROGRAMMATIC_ENDPOINT)
-                .path(serverEndpointConfig.getPath())
-                .build();
+        Endpoint endpoint = new EndpointProgrammaticJava(serverEndpointConfig);
 
         endpoints.add(endpoint);
     }

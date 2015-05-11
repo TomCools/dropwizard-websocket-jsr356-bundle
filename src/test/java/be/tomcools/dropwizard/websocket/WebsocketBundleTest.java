@@ -11,6 +11,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import javax.websocket.server.ServerEndpointConfig;
+
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
 
@@ -56,7 +58,7 @@ public class WebsocketBundleTest {
     }
 
     @Test
-    public void whenAddEndpointIsCalledDelegatesCallToWebsocketHandler() throws Exception {
+    public void whenAddAnnotatedEndpointIsCalledDelegatesCallToWebsocketHandler() throws Exception {
         Class<?> testClass = this.getClass();
         sut.initialize(bootstrap);
         sut.run(configuration, environment);
@@ -64,5 +66,17 @@ public class WebsocketBundleTest {
         sut.addEndpoint(testClass);
 
         verify(websocketHandler).addEndpoint(testClass);
+    }
+
+    @Test
+    public void whenAddProgrammaticEndpointIsCalledDelegatesCallToWebsocketHandler() throws Exception {
+        Class<?> testClass = this.getClass();
+        sut.initialize(bootstrap);
+        sut.run(configuration, environment);
+
+        ServerEndpointConfig config = ServerEndpointConfig.Builder.create(testClass, "/path").build();
+        sut.addEndpoint(config);
+
+        verify(websocketHandler).addEndpoint(config);
     }
 }

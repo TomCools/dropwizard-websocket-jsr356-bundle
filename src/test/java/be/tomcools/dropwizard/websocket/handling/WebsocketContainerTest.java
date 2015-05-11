@@ -1,8 +1,7 @@
 package be.tomcools.dropwizard.websocket.handling;
 
-import be.tomcools.dropwizard.websocket.registration.Endpoint;
-import be.tomcools.dropwizard.websocket.registration.endpointtypes.EndpointType;
 import be.tomcools.dropwizard.websocket.registration.Endpoints;
+import be.tomcools.dropwizard.websocket.registration.endpointtypes.EndpointAnnotatedJava;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -32,8 +31,8 @@ public class WebsocketContainerTest {
     @Test
     public void whenRegisterEndpointsIsCalledAddsEndpointsToContainer() throws DeploymentException {
         Endpoints endpoints = new Endpoints();
-        endpoints.add(Endpoint.builder().endpointClass(Object.class).type(EndpointType.JAVA_ANNOTATED_ENDPOINT).build());
-        endpoints.add(Endpoint.builder().endpointClass(String.class).type(EndpointType.JAVA_ANNOTATED_ENDPOINT).build());
+        endpoints.add(new EndpointAnnotatedJava(Object.class, "path"));
+        endpoints.add(new EndpointAnnotatedJava(String.class, "path"));
 
         sut.registerEndpoints(endpoints);
 
@@ -52,8 +51,8 @@ public class WebsocketContainerTest {
     @Test
     public void whenDeploymentExceptionOccursWhenTryingToLoadAClassStillAddsOthers() throws DeploymentException {
         Endpoints endpoints = new Endpoints();
-        endpoints.add(Endpoint.builder().endpointClass(Object.class).type(EndpointType.JAVA_ANNOTATED_ENDPOINT).build());
-        endpoints.add(Endpoint.builder().endpointClass(String.class).type(EndpointType.JAVA_ANNOTATED_ENDPOINT).build());
+        endpoints.add(new EndpointAnnotatedJava(Object.class, "path"));
+        endpoints.add(new EndpointAnnotatedJava(String.class, "path"));
         doThrow(DeploymentException.class).when(container).addEndpoint(Object.class);
 
         sut.registerEndpoints(endpoints);
