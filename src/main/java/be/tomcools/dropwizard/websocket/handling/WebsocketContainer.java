@@ -18,21 +18,36 @@ public class WebsocketContainer {
         this.serverContainer = serverContainer;
     }
 
-    public void registerEndpoints(Endpoints endpoints) {
-        StringBuilder endpointsAdded = new StringBuilder("Registered websocket endpointtypes: ")
-                .append(System.lineSeparator())
-                .append(System.lineSeparator());
+    public void registerEndpoints(final Endpoints endpoints) {
+        final Endpoints succesfullyAdded = new Endpoints();
 
         for (Endpoint endpoint : endpoints) {
             try {
                 register(endpoint);
-                endpointsAdded.append(endpoint.toLogString()).append(System.lineSeparator());
+                succesfullyAdded.add(endpoint);
             } catch (DeploymentException e) {
                 LOGGER.error("Could not add websocket endpoint {} to the deployment.", endpoint, e);
             }
         }
+        logRegisteredEndpoints(succesfullyAdded);
+    }
+
+    private void logRegisteredEndpoints(Endpoints succesfullyAdded) {
+        StringBuilder endpointsAdded = new StringBuilder("Registered websocket endpoints: ")
+                .append(System.lineSeparator())
+                .append(System.lineSeparator());
+
+        if (succesfullyAdded.isEmpty()) {
+            endpointsAdded.append("\tNONE \tNo endpoints were added to the server. Check logs for errors if you registered endpoints.").append(System.lineSeparator());
+        } else {
+            for (Endpoint endpoint : succesfullyAdded) {
+                String endpointLogString = String.format("\tGET\t\t%s (%s)", endpoint.getPath(), endpoint.getEndpointClass().getName());
+                endpointsAdded.append(endpointLogString).append(System.lineSeparator());
+            }
+        }
 
         LOGGER.info(endpointsAdded.toString());
+
     }
 
     private void register(Endpoint endpoint) throws DeploymentException {

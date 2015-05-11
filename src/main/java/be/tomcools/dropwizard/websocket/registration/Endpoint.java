@@ -34,8 +34,4 @@ public abstract class Endpoint {
                 ", path='" + path + '\'' +
                 '}';
     }
-
-    public final String toLogString() {
-        return String.format("\tGET\t\t%s (%s)", getPath(), getEndpointClass().getName());
-    }
 }

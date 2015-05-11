@@ -30,4 +30,8 @@ public class Endpoints implements Iterable<Endpoint> {
     public int size() {
         return endpoints.size();
     }
+
+    public boolean isEmpty() {
+        return endpoints.isEmpty();
+    }
 }
