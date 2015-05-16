@@ -14,7 +14,11 @@ How does the bundle work?
 ---
 Add the maven dependency: 
 
-    Currently this is work in progress.
+    <dependency>
+      <groupId>be.tomcools</groupId>
+      <artifactId>dropwizard-websocket-jee7-bundle</artifactId>
+      <version>1.0.0</version>
+    </dependency>
 
 Add the WebsocketBundle object to the Application.class and add the Endpoint classes you want to load:
 
@@ -29,14 +33,20 @@ Add the WebsocketBundle object to the Application.class and add the Endpoint cla
     
         @Override
         public void run(IntegrationTestConfiguration configuration, Environment environment) throws Exception {
+            //Annotated endpoint
             websocket.addEndpoint(PingPongServerEndpoint.class);
+    
+            //programmatic endpoint
+            ServerEndpointConfig serverEndpointConfig = ServerEndpointConfig.Builder.create(ProgrammaticServerEndpoint.class, "/programmatic").build();
+            websocket.addEndpoint(serverEndpointConfig);
         }
     }
 
 Start your server. During startup, all registered Websocket-endpoints will be logged in the same way other resources are logged.
 
-    INFO  [2015-05-08 22:07:22,980] be.tomcools.dropwizard.websocket.handling.WebsocketContainer: Registered websocket endpoints: 
+    INFO  [2015-05-16 18:18:04,230] be.tomcools.dropwizard.websocket.handling.WebsocketContainer: Registered websocket endpoints: 
     
+    	GET		/programmatic (be.tomcools.dropwizard.websocket.integrationtest.programmaticjavaee.ProgrammaticServerEndpoint)
     	GET		/pingpong (be.tomcools.dropwizard.websocket.integrationtest.annotatedjavaee.PingPongServerEndpoint)
     
 
