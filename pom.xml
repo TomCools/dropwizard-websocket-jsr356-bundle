@@ -26,8 +26,8 @@
 
     <scm>
         <url>https://github.com/TomCools/dropwizard-websocket-jee7-bundle</url>
-        <connection>scm:git:git@github.com:TomCools/dropwizard-websocket-jee7-bundle.git</connection>
-        <developerConnection>scm:git:git@github.com:TomCools/dropwizard-websocket-jee7-bundle.git</developerConnection>
+        <connection>scm:git:https://github.com/TomCools/dropwizard-websocket-jee7-bundle.git</connection>
+        <developerConnection>scm:git:https://github.com/TomCools/dropwizard-websocket-jee7-bundle.git</developerConnection>
         <tag>dropwizard-websocket-jee7-bundle-0.0.2</tag>
     </scm>
 
