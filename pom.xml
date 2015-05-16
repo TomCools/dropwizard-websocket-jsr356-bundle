@@ -1,10 +1,11 @@
 <?xml version="1.0"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>be.tomcools</groupId>
     <artifactId>dropwizard-websocket-jee7-bundle</artifactId>
-    <version>0.0.5</version>
+    <version>0.0.2-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>dropwizard-websocket-jee7-bundle</name>
@@ -27,7 +28,7 @@
         <url>https://github.com/TomCools/dropwizard-websocket-jee7-bundle</url>
         <connection>scm:git:git@github.com:TomCools/dropwizard-websocket-jee7-bundle.git</connection>
         <developerConnection>scm:git:git@github.com:TomCools/dropwizard-websocket-jee7-bundle.git</developerConnection>
-        <tag>dropwizard-websocket-jee7-bundle-0.0.5</tag>
+        <tag>dropwizard-websocket-jee7-bundle-0.0.2</tag>
     </scm>
 
     <properties>
