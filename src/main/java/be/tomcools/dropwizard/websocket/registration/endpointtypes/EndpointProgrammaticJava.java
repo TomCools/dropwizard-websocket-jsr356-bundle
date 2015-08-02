@@ -1,9 +1,11 @@
 package be.tomcools.dropwizard.websocket.registration.endpointtypes;
 
 import be.tomcools.dropwizard.websocket.registration.Endpoint;
+import lombok.EqualsAndHashCode;
 
 import javax.websocket.server.ServerEndpointConfig;
 
+@EqualsAndHashCode
 public class EndpointProgrammaticJava extends Endpoint {
     private ServerEndpointConfig config;
 
@@ -15,4 +17,6 @@ public class EndpointProgrammaticJava extends Endpoint {
     public ServerEndpointConfig getConfig() {
         return config;
     }
+
+
 }
