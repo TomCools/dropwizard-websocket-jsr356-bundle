@@ -5,7 +5,6 @@ import lombok.EqualsAndHashCode;
 
 import javax.websocket.server.ServerEndpointConfig;
 
-@EqualsAndHashCode
 public class EndpointProgrammaticJava extends Endpoint {
     private ServerEndpointConfig config;
 

@@ -5,7 +5,6 @@ import io.dropwizard.server.ServerFactory;
 import io.dropwizard.setup.Environment;
 import org.eclipse.jetty.server.Server;
 
-//Used to set the required backreference from the Contexts to the built Server;
 public class ServerFactoryWrapper implements ServerFactory {
     private WebsocketHandler handler;
     private ServerFactory serverFactory;
