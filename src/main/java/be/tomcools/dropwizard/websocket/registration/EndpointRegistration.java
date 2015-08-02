@@ -11,8 +11,6 @@ public class EndpointRegistration {
     private Endpoints endpoints = new Endpoints();
 
     public void add(Class<?> endpointClass) {
-        //TODO implement checks on Class; (has annotation/interface)
-
         String endpointPath = determineAnnotatedEndpointPath(endpointClass);
 
         Endpoint endpoint = new EndpointAnnotatedJava(endpointClass, endpointPath);
@@ -21,8 +19,6 @@ public class EndpointRegistration {
     }
 
     public void add(ServerEndpointConfig serverEndpointConfig) {
-        //TODO implement checks on Class; (has annotation/interface)
-
         Endpoint endpoint = new EndpointProgrammaticJava(serverEndpointConfig);
 
         addEndpoint(endpoint);

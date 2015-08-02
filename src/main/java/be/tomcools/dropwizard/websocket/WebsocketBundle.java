@@ -25,7 +25,7 @@ public class WebsocketBundle implements ConfiguredBundle {
         handler.addEndpoint(serverEndpointConfig);
     }
 
-    public void run(Configuration configuration, Environment environment) throws Exception {
+    public void run(Configuration configuration, Environment environment) {
         handler = handlerFactory.forEnvironment(environment);
         ServerFactory serverFactory = configuration.getServerFactory();
         ServerFactoryWrapper factoryWrapper = new ServerFactoryWrapper(serverFactory, handler);
@@ -34,7 +34,7 @@ public class WebsocketBundle implements ConfiguredBundle {
 
     @Override
     public void initialize(Bootstrap bootstrap) {
-
+        //This method is not used because no initialization logic is required.
     }
 
     @Override

@@ -7,14 +7,14 @@ import java.util.Iterator;
 import java.util.Set;
 
 public class Endpoints implements Iterable<Endpoint> {
-    private Set<Endpoint> endpoints = new HashSet<>();
+    private Set<Endpoint> endpointList = new HashSet<>();
 
     public void add(Endpoint endpoint) {
-        endpoints.add(endpoint);
+        endpointList.add(endpoint);
     }
 
     public Optional<Endpoint> endpointForPath(String path) {
-        for (Endpoint endpoint : endpoints) {
+        for (Endpoint endpoint : endpointList) {
             if (endpoint.getPath().equals(path)) {
                 return Optional.fromNullable(endpoint);
             }
@@ -24,14 +24,14 @@ public class Endpoints implements Iterable<Endpoint> {
 
     @Override
     public Iterator<Endpoint> iterator() {
-        return endpoints.iterator();
+        return endpointList.iterator();
     }
 
     public int size() {
-        return endpoints.size();
+        return endpointList.size();
     }
 
     public boolean isEmpty() {
-        return endpoints.isEmpty();
+        return endpointList.isEmpty();
     }
 }
