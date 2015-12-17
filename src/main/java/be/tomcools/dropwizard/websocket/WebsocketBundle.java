@@ -9,7 +9,7 @@ import io.dropwizard.setup.Environment;
 
 import javax.websocket.server.ServerEndpointConfig;
 
-public class WebsocketBundle implements ConfiguredBundle {
+public class WebsocketBundle<T extends Configuration> implements ConfiguredBundle<T> {
     private WebsocketHandlerFactory handlerFactory = new WebsocketHandlerFactory();
 
     private WebsocketHandler handler;
@@ -25,7 +25,7 @@ public class WebsocketBundle implements ConfiguredBundle {
         handler.addEndpoint(serverEndpointConfig);
     }
 
-    public void run(Configuration configuration, Environment environment) {
+    public void run(T configuration, Environment environment) {
         handler = handlerFactory.forEnvironment(environment);
         ServerFactory serverFactory = configuration.getServerFactory();
         ServerFactoryWrapper factoryWrapper = new ServerFactoryWrapper(serverFactory, handler);
@@ -35,10 +35,5 @@ public class WebsocketBundle implements ConfiguredBundle {
     @Override
     public void initialize(Bootstrap bootstrap) {
         //This method is not used because no initialization logic is required.
-    }
-
-    @Override
-    public void run(Object configuration, Environment environment) throws Exception {
-        run((Configuration) configuration, environment);
     }
 }
