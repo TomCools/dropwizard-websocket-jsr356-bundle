@@ -10,6 +10,7 @@ import javax.websocket.Session;
 import javax.websocket.WebSocketContainer;
 import java.io.IOException;
 import java.net.URI;
+import java.util.concurrent.TimeUnit;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
@@ -18,10 +19,12 @@ public class WebsocketBundleIT {
     Thread server;
     @Before
     public void init() throws InterruptedException {
+        final IntegrationTestApplication integrationTestApplication = new IntegrationTestApplication();
+
         server = new Thread(new Runnable() {
             public void run() {
                 try {
-                    new IntegrationTestApplication().run("server");
+                    integrationTestApplication.run("server");
                 } catch (Exception e) {
                     throw new IllegalStateException(e);
                 }
@@ -29,7 +32,7 @@ public class WebsocketBundleIT {
         });
         server.run();
 
-        Thread.sleep(7000);
+        integrationTestApplication.initLatch.await(7000, TimeUnit.SECONDS);
     }
 
     @Test
