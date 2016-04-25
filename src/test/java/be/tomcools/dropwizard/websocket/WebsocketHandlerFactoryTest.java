@@ -14,13 +14,15 @@ import static org.mockito.Mockito.mock;
 @RunWith(MockitoJUnitRunner.class)
 public class WebsocketHandlerFactoryTest {
     private final Environment environment = mock(Environment.class, RETURNS_DEEP_STUBS);
+    private WebsocketConfiguration configuration = mock(WebsocketConfiguration.class);
+
 
     @InjectMocks
     private WebsocketHandlerFactory sut;
 
     @Test
     public void whenCreatingHandlerForEnvironmentReturnsWebsocketHandler() {
-        WebsocketHandler websocketHandler = sut.forEnvironment(environment);
+        WebsocketHandler websocketHandler = sut.forEnvironment(configuration, environment);
 
         assertThat(websocketHandler, notNullValue());
     }

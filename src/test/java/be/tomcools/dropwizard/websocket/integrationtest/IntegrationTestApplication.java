@@ -5,25 +5,24 @@ import be.tomcools.dropwizard.websocket.integrationtest.annotatedjavaee.PingPong
 import be.tomcools.dropwizard.websocket.integrationtest.programmaticjavaee.ProgrammaticServerEndpoint;
 import com.codahale.metrics.health.HealthCheck;
 import io.dropwizard.Application;
-import io.dropwizard.Configuration;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 
 import javax.websocket.server.ServerEndpointConfig;
 import java.util.concurrent.CountDownLatch;
 
-public class IntegrationTestApplication extends Application<Configuration> {
+public class IntegrationTestApplication extends Application<IntegrationConfiguration> {
     private WebsocketBundle websocket = new WebsocketBundle();
     CountDownLatch initLatch = new CountDownLatch(1);
 
     @Override
-    public void initialize(Bootstrap<Configuration> bootstrap) {
+    public void initialize(Bootstrap<IntegrationConfiguration> bootstrap) {
         super.initialize(bootstrap);
         bootstrap.addBundle(websocket);
     }
 
     @Override
-    public void run(Configuration configuration, Environment environment) throws Exception {
+    public void run(IntegrationConfiguration configuration, Environment environment) throws Exception {
         //Annotated endpoint
         websocket.addEndpoint(PingPongServerEndpoint.class);
 

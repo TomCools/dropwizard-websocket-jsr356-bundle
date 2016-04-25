@@ -1,5 +1,6 @@
 package be.tomcools.dropwizard.websocket.handling;
 
+import be.tomcools.dropwizard.websocket.WebsocketConfiguration;
 import be.tomcools.dropwizard.websocket.registration.Endpoints;
 import be.tomcools.dropwizard.websocket.registration.endpointtypes.EndpointAnnotatedJava;
 import org.junit.Test;
@@ -20,12 +21,15 @@ public class WebsocketContainerTest {
     @Mock
     private ServerContainer container;
 
+    @Mock
+    private WebsocketConfiguration configuration;
+
     @InjectMocks
     private WebsocketContainer sut;
 
     @Test
     public void canConstructWebsocketContainerWithServercontainer() {
-        new WebsocketContainer(container);
+        new WebsocketContainer(configuration, container);
     }
 
     @Test
@@ -58,5 +62,18 @@ public class WebsocketContainerTest {
         sut.registerEndpoints(endpoints);
 
         verify(container, times(2)).addEndpoint(any(Class.class));
+    }
+
+    @Test
+    public void canConstructWebsocketContainerWithServercontainerAndOptions() {
+        when(configuration.getAsyncSendTimeout()).thenReturn(10000L);
+        when(configuration.getMaxBinaryMessageBufferSize()).thenReturn(9000);
+        when(configuration.getMaxSessionIdleTimeout()).thenReturn(8000l);
+        when(configuration.getMaxTextMessageBufferSize()).thenReturn(7000);
+        new WebsocketContainer(configuration, container);
+        verify(container, times(1)).setAsyncSendTimeout(10000L);
+        verify(container, times(1)).setDefaultMaxBinaryMessageBufferSize(9000);
+        verify(container, times(1)).setDefaultMaxSessionIdleTimeout(8000L);
+        verify(container, times(1)).setDefaultMaxTextMessageBufferSize(7000);
     }
 }

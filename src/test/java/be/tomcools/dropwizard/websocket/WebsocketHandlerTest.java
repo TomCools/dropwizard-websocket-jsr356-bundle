@@ -4,6 +4,7 @@ import be.tomcools.dropwizard.websocket.handling.WebsocketContainer;
 import be.tomcools.dropwizard.websocket.handling.WebsocketContainerInitializer;
 import be.tomcools.dropwizard.websocket.registration.EndpointRegistration;
 import be.tomcools.dropwizard.websocket.registration.Endpoints;
+import io.dropwizard.Configuration;
 import io.dropwizard.jetty.MutableServletContextHandler;
 import io.dropwizard.setup.Environment;
 import org.junit.Before;
@@ -24,9 +25,14 @@ import static org.mockito.Mockito.*;
 public class WebsocketHandlerTest {
 
     private final Environment environment = mock(Environment.class, RETURNS_DEEP_STUBS);
+    private final WebsocketBundleConfiguration configuration = (WebsocketBundleConfiguration)mock(Configuration.class,
+            withSettings().defaultAnswer(RETURNS_DEEP_STUBS).extraInterfaces(WebsocketBundleConfiguration.class));
 
     @Mock
     private EndpointRegistration endpointRegistration;
+
+    @Mock
+    private WebsocketConfiguration wsConfiguration;
 
     @Mock
     private WebsocketContainerInitializer containerInitializer;
@@ -42,13 +48,13 @@ public class WebsocketHandlerTest {
 
     @Before
     public void init() {
-        when(containerInitializer.initialize(any(MutableServletContextHandler.class))).thenReturn(container);
+        when(containerInitializer.initialize(any(WebsocketConfiguration.class), any(MutableServletContextHandler.class))).thenReturn(container);
         when(endpointRegistration.getRegisteredEndpoints()).thenReturn(endpoints);
     }
 
     @Test
     public void canConstructHandlerWithEnvironment() {
-        new WebsocketHandler(environment);
+        new WebsocketHandler(configuration.getWebsocketConfiguration(), environment);
     }
 
     @Test
@@ -70,7 +76,7 @@ public class WebsocketHandlerTest {
     public void whenInitializeIsCalled_InitializesWebsocketContainer() {
         sut.initialize();
 
-        verify(containerInitializer).initialize(environment.getApplicationContext());
+        verify(containerInitializer).initialize(wsConfiguration, environment.getApplicationContext());
     }
 
     @Test
