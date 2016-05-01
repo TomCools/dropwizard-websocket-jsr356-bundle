@@ -9,8 +9,9 @@ import io.dropwizard.setup.Environment;
 
 import javax.websocket.server.ServerEndpointConfig;
 
-public class WebsocketBundle implements ConfiguredBundle<WebsocketBundleConfiguration> {
+public class WebsocketBundle<T extends Configuration> implements ConfiguredBundle<T> {
     private WebsocketHandlerFactory handlerFactory = new WebsocketHandlerFactory();
+    final static WebsocketConfiguration DEFAULT_CONFIG = new WebsocketConfiguration();
 
     private WebsocketHandler handler;
 
@@ -25,11 +26,19 @@ public class WebsocketBundle implements ConfiguredBundle<WebsocketBundleConfigur
         handler.addEndpoint(serverEndpointConfig);
     }
 
-    public void run(WebsocketBundleConfiguration configuration, Environment environment) {
-        handler = handlerFactory.forEnvironment(configuration.getWebsocketConfiguration(), environment);
-        ServerFactory serverFactory = ((Configuration)configuration).getServerFactory();
+    public void run(T configuration, Environment environment) {
+        handler = determineHandler(configuration, environment);
+        ServerFactory serverFactory = configuration.getServerFactory();
         ServerFactoryWrapper factoryWrapper = new ServerFactoryWrapper(serverFactory, handler);
-        ((Configuration)configuration).setServerFactory(factoryWrapper);
+        configuration.setServerFactory(factoryWrapper);
+    }
+
+    private WebsocketHandler determineHandler(T configuration, Environment environment) {
+        if (configuration instanceof WebsocketBundleConfiguration) {
+            return handlerFactory.forEnvironment(((WebsocketBundleConfiguration) configuration).getWebsocketConfiguration(), environment);
+        } else {
+            return handlerFactory.forEnvironment(DEFAULT_CONFIG, environment);
+        }
     }
 
     @Override

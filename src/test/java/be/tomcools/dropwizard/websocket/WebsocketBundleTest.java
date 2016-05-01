@@ -36,8 +36,8 @@ public class WebsocketBundleTest {
 
     @Before
     public void init() {
-        when(websocketHandlerFactory.forEnvironment(((WebsocketBundleConfiguration)configuration).getWebsocketConfiguration(),
-                environment)).thenReturn(websocketHandler);
+        when(websocketHandlerFactory.forEnvironment(any(WebsocketConfiguration.class),
+                eq(environment))).thenReturn(websocketHandler);
     }
 
     @Test
@@ -54,9 +54,9 @@ public class WebsocketBundleTest {
 
     @Test
     public void whenRunIsCalledRetrievesHandlerInstanceFromFactoryForTheSuppliedEnvironment() throws Exception {
-        sut.run(((WebsocketBundleConfiguration)configuration), environment);
+        sut.run(configuration, environment);
 
-        verify(websocketHandlerFactory).forEnvironment(((WebsocketBundleConfiguration)configuration).getWebsocketConfiguration(),
+        verify(websocketHandlerFactory).forEnvironment(((WebsocketBundleConfiguration) configuration).getWebsocketConfiguration(),
                 environment);
     }
 
@@ -64,7 +64,7 @@ public class WebsocketBundleTest {
     public void whenAddAnnotatedEndpointIsCalledDelegatesCallToWebsocketHandler() throws Exception {
         Class<?> testClass = this.getClass();
         sut.initialize(bootstrap);
-        sut.run(((WebsocketBundleConfiguration)configuration), environment);
+        sut.run(configuration, environment);
 
         sut.addEndpoint(testClass);
 
@@ -75,11 +75,25 @@ public class WebsocketBundleTest {
     public void whenAddProgrammaticEndpointIsCalledDelegatesCallToWebsocketHandler() throws Exception {
         Class<?> testClass = this.getClass();
         sut.initialize(bootstrap);
-        sut.run(((WebsocketBundleConfiguration)configuration), environment);
+        sut.run(configuration, environment);
 
         ServerEndpointConfig config = ServerEndpointConfig.Builder.create(testClass, "/path").build();
         sut.addEndpoint(config);
 
         verify(websocketHandler).addEndpoint(config);
+    }
+
+    @Test
+    public void whenConfigurationDoesNotImplementWebsocketConfigurationInterfaceUsesDefaultWebsocketConfiguration() {
+        Configuration configuration = mock(Configuration.class,
+                withSettings().defaultAnswer(RETURNS_DEEP_STUBS));
+
+        Class<?> testClass = this.getClass();
+        sut.initialize(bootstrap);
+        sut.run(configuration, environment);
+
+        sut.addEndpoint(testClass);
+
+        verify(websocketHandlerFactory).forEnvironment(WebsocketBundle.DEFAULT_CONFIG, environment);
     }
 }
