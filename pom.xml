@@ -4,7 +4,7 @@
 
     <groupId>be.tomcools</groupId>
     <artifactId>dropwizard-websocket-jee7-bundle</artifactId>
-    <version>1.0.2-SNAPSHOT</version>
+    <version>1.1.0</version>
     <packaging>jar</packaging>
 
     <name>dropwizard-websocket-jee7-bundle</name>
@@ -28,7 +28,7 @@
         <url>https://github.com/TomCools/dropwizard-websocket-jee7-bundle</url>
         <connection>scm:git:https://github.com/TomCools/dropwizard-websocket-jee7-bundle.git</connection>
         <developerConnection>scm:git:https://github.com/TomCools/dropwizard-websocket-jee7-bundle.git</developerConnection>
-        <tag>dropwizard-websocket-jee7-bundle-0.0.104</tag>
+        <tag>dropwizard-websocket-jee7-bundle-1.1.0</tag>
     </scm>
 
     <properties>
