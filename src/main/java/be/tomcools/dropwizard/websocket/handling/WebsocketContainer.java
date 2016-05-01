@@ -1,8 +1,10 @@
 package be.tomcools.dropwizard.websocket.handling;
 
+import be.tomcools.dropwizard.websocket.WebsocketConfiguration;
 import be.tomcools.dropwizard.websocket.registration.Endpoint;
 import be.tomcools.dropwizard.websocket.registration.Endpoints;
 import be.tomcools.dropwizard.websocket.registration.endpointtypes.EndpointProgrammaticJava;
+import com.google.common.base.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,8 +16,25 @@ public class WebsocketContainer {
 
     private ServerContainer serverContainer;
 
-    public WebsocketContainer(ServerContainer serverContainer) {
+    public WebsocketContainer(WebsocketConfiguration configuration, ServerContainer serverContainer) {
         this.serverContainer = serverContainer;
+
+        Optional<Long> longVal = Optional.fromNullable(configuration.getMaxSessionIdleTimeout());
+        if (longVal.isPresent()) {
+            this.serverContainer.setDefaultMaxSessionIdleTimeout(longVal.get());
+        }
+        longVal = Optional.fromNullable(configuration.getAsyncSendTimeout());
+        if (longVal.isPresent()) {
+            this.serverContainer.setAsyncSendTimeout(longVal.get());
+        }
+        Optional<Integer> intVal = Optional.fromNullable(configuration.getMaxBinaryMessageBufferSize());
+        if (intVal.isPresent()) {
+            this.serverContainer.setDefaultMaxBinaryMessageBufferSize(intVal.get());
+        }
+        intVal = Optional.fromNullable(configuration.getMaxTextMessageBufferSize());
+        if (intVal.isPresent()) {
+            this.serverContainer.setDefaultMaxTextMessageBufferSize(intVal.get());
+        }
     }
 
     public void registerEndpoints(final Endpoints endpoints) {

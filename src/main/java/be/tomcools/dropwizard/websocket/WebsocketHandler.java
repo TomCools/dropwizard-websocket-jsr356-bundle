@@ -9,14 +9,16 @@ import javax.websocket.server.ServerEndpointConfig;
 
 public class WebsocketHandler {
     private EndpointRegistration endpointRegistration;
+    private final WebsocketConfiguration configuration;
     private Environment environment;
     private WebsocketContainerInitializer containerInitializer;
 
-    public WebsocketHandler(Environment environment) {
-        this(environment, new EndpointRegistration(), new WebsocketContainerInitializer());
+    public WebsocketHandler(WebsocketConfiguration configuration, Environment environment) {
+        this(configuration, environment, new EndpointRegistration(), new WebsocketContainerInitializer());
     }
 
-    public WebsocketHandler(Environment environment, EndpointRegistration endpointRegistration, WebsocketContainerInitializer containerInitializer) {
+    public WebsocketHandler(WebsocketConfiguration configuration, Environment environment, EndpointRegistration endpointRegistration, WebsocketContainerInitializer containerInitializer) {
+        this.configuration = configuration;
         this.environment = environment;
         this.endpointRegistration = endpointRegistration;
         this.containerInitializer = containerInitializer;
@@ -31,7 +33,7 @@ public class WebsocketHandler {
     }
 
     public void initialize() {
-        WebsocketContainer serverContainer = containerInitializer.initialize(environment.getApplicationContext());
+        WebsocketContainer serverContainer = containerInitializer.initialize(configuration, environment.getApplicationContext());
         serverContainer.registerEndpoints(endpointRegistration.getRegisteredEndpoints());
     }
 
