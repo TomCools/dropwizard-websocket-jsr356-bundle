@@ -53,9 +53,9 @@ Start your server. During startup, all registered Websocket-endpoints will be lo
     	GET		/programmatic (be.tomcools.dropwizard.websocket.integrationtest.programmaticjavaee.ProgrammaticServerEndpoint)
     	GET		/pingpong (be.tomcools.dropwizard.websocket.integrationtest.annotatedjavaee.PingPongServerEndpoint)
     
----
-Configuration
 
+Configuration
+---
 Websocket default configuration can be overriden using the WebsocketBundleConfiguration Interface on the Configuration class.
 When the interface is not use, the configuration will not be overridden.
 
