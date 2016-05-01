@@ -55,12 +55,19 @@ Start your server. During startup, all registered Websocket-endpoints will be lo
 ---
 Configuration
 
-Websocket default configuration can be overriden using the WebsocketBundleConfiguration Interface.
+Websocket default configuration can be overriden using the WebsocketBundleConfiguration Interface on the Configuration class.
+When the interface is not use, the configuration will not be overridden.
 
 public class IntegrationConfiguration extends Configuration implements WebsocketBundleConfiguration {
+
+    @Valid
+    @NotNull
+    @JsonProperty
+    private final WebsocketConfiguration websocketConfiguration = new WebsocketConfiguration();
+
     @Override
     public WebsocketConfiguration getWebsocketConfiguration() {
-        ...
+        return websocketConfiguration;
     }
 }
 
