@@ -1,6 +1,9 @@
 Websocket (JSR 356) bundle for Dropwizard
 ==========
 [![Build Status](https://travis-ci.org/TomCools/dropwizard-websocket-jee7-bundle.png?branch=master)](https://travis-ci.org/TomCools/dropwizard-websocket-jee7-bundle)
+[![][travis img]][travis]
+[![][maven img]][maven]
+[![][license img]][license]
 
 *Adding some Websocket-magic to Dropwizard.*
 
@@ -17,7 +20,7 @@ Add the maven dependency:
     <dependency>
       <groupId>be.tomcools</groupId>
       <artifactId>dropwizard-websocket-jee7-bundle</artifactId>
-      <version>1.0.0</version>
+      <version>1.0.1</version>
     </dependency>
 
 Add the WebsocketBundle object to the Application.class and add the Endpoint classes you want to load:
@@ -49,6 +52,31 @@ Start your server. During startup, all registered Websocket-endpoints will be lo
     	GET		/programmatic (be.tomcools.dropwizard.websocket.integrationtest.programmaticjavaee.ProgrammaticServerEndpoint)
     	GET		/pingpong (be.tomcools.dropwizard.websocket.integrationtest.annotatedjavaee.PingPongServerEndpoint)
     
+---
+Configuration
+
+Websocket default configuration can be overriden using the WebsocketBundleConfiguration Interface.
+
+public class IntegrationConfiguration extends Configuration implements WebsocketBundleConfiguration {
+    @Override
+    public WebsocketConfiguration getWebsocketConfiguration() {
+        ...
+    }
+}
+
+WebsocketConfiguration:
+public class WebsocketConfiguration {
+
+    @JsonProperty
+    private Integer maxTextMessageBufferSize;
+    @JsonProperty
+    private Long asyncSendTimeout;
+    @JsonProperty
+    private Long maxSessionIdleTimeout;
+    @JsonProperty
+    private Integer maxBinaryMessageBufferSize;
+}
+
 
     
 Need help? Found an issue? Want extra functionality?
