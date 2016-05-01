@@ -160,7 +160,6 @@
                 <version>2.5.2</version>
                 <configuration>
                     <preparationGoals>clean test</preparationGoals>
-                    <mavenHome>I:\tools\maven</mavenHome>
                 </configuration>
             </plugin>
         </plugins>
