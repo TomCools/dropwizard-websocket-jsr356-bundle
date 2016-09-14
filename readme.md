@@ -21,7 +21,7 @@ Add the maven dependency:
     <dependency>
       <groupId>be.tomcools</groupId>
       <artifactId>dropwizard-websocket-jee7-bundle</artifactId>
-      <version>1.1.0</version>
+      <version>1.1.1</version>
     </dependency>
 
 Add the WebsocketBundle object to the Application.class and add the Endpoint classes you want to load:
