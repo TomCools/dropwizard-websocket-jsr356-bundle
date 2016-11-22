@@ -18,4 +18,28 @@ public abstract class Endpoint {
         this.type = type;
         this.path = path;
     }
+
+    public Class<?> getEndpointClass() {
+        return endpointClass;
+    }
+
+    public void setEndpointClass(Class<?> endpointClass) {
+        this.endpointClass = endpointClass;
+    }
+
+    public EndpointType getType() {
+        return type;
+    }
+
+    public void setType(EndpointType type) {
+        this.type = type;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
 }
