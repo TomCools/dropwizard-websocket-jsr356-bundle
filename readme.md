@@ -1,9 +1,8 @@
 Websocket (JSR 356) bundle for Dropwizard
 ==========
-https://maven-badges.herokuapp.com/maven-central/be.tomcools/dropwizard-websocket-jee7-bundle/badge.svg?style=flat
 
 [![Build Status](https://travis-ci.org/TomCools/dropwizard-websocket-jee7-bundle.png?branch=master)](https://travis-ci.org/TomCools/dropwizard-websocket-jee7-bundle)
-[![Latest Release](https://img.shields.io/badge/Latest%20Release-1.1.0-green.svg)](http://mvnrepository.com/artifact/be.tomcools/dropwizard-websocket-jee7-bundle)
+[![Latest Release](https://img.shields.io/badge/Latest%20Release-2.0.0-green.svg)](http://mvnrepository.com/artifact/be.tomcools/dropwizard-websocket-jee7-bundle)
 [![License](https://img.shields.io/badge/License-Apache%202-blue.svg)](https://github.com/TomCools/dropwizard-websocket-jee7-bundle/blob/master/LICENSE)
 
 *Adding some Websocket-magic to Dropwizard.*
@@ -21,7 +20,14 @@ Add the maven dependency:
     <dependency>
       <groupId>be.tomcools</groupId>
       <artifactId>dropwizard-websocket-jee7-bundle</artifactId>
-      <version>1.1.1</version>
+      <version>2.0.0</version>
+    </dependency>
+    
+The version 2.0.0 does no longer support Java 7. Please use the older dependency or upgrade to Java 8
+    <dependency>
+      <groupId>be.tomcools</groupId>
+      <artifactId>dropwizard-websocket-jee7-bundle</artifactId>
+      <version>1.1.0</version>
     </dependency>
 
 Add the WebsocketBundle object to the Application.class and add the Endpoint classes you want to load:
@@ -48,7 +54,7 @@ Add the WebsocketBundle object to the Application.class and add the Endpoint cla
 
 Start your server. During startup, all registered Websocket-endpoints will be logged in the same way other resources are logged.
 
-    INFO  [2015-05-16 18:18:04,230] be.tomcools.dropwizard.websocket.handling.WebsocketContainer: Registered websocket endpoints: 
+    INFO  [2017-05-16 18:18:04,230] be.tomcools.dropwizard.websocket.handling.WebsocketContainer: Registered websocket endpoints: 
     
     	GET		/programmatic (be.tomcools.dropwizard.websocket.integrationtest.programmaticjavaee.ProgrammaticServerEndpoint)
     	GET		/pingpong (be.tomcools.dropwizard.websocket.integrationtest.annotatedjavaee.PingPongServerEndpoint)
