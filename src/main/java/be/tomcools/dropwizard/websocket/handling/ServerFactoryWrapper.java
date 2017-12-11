@@ -22,4 +22,9 @@ public class ServerFactoryWrapper implements ServerFactory {
         handler.initialize();
         return server;
     }
+
+    @Override
+    public void configure(Environment environment) {
+        //nothing
+    }
 }
