@@ -1,6 +1,5 @@
 package be.tomcools.dropwizard.websocket;
 
-import be.tomcools.dropwizard.websocket.handling.WebsocketContainer;
 import be.tomcools.dropwizard.websocket.handling.WebsocketContainerInitializer;
 import be.tomcools.dropwizard.websocket.registration.EndpointRegistration;
 import be.tomcools.dropwizard.websocket.registration.Endpoints;

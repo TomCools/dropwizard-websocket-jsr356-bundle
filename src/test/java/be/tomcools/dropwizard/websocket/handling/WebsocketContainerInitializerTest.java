@@ -1,9 +1,6 @@
 package be.tomcools.dropwizard.websocket.handling;
 
-import be.tomcools.dropwizard.websocket.WebsocketConfiguration;
 import be.tomcools.dropwizard.websocket.WebsocketHandler;
-import be.tomcools.dropwizard.websocket.registration.EndpointRegistration;
-import be.tomcools.dropwizard.websocket.registration.Endpoints;
 import io.dropwizard.jetty.MutableServletContextHandler;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.websocket.servlet.WebSocketUpgradeFilter;
@@ -16,14 +13,12 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import jakarta.servlet.ServletException;
 
-import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class WebsocketContainerInitializerTest {
 
     private MutableServletContextHandler servletContextHandler = mock(MutableServletContextHandler.class);
-    private WebsocketConfiguration configuration = new WebsocketConfiguration();
     private Server server = mock(Server.class, RETURNS_DEEP_STUBS);
 
     @Mock
