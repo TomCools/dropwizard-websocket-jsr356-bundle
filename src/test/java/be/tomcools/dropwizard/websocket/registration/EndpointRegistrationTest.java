@@ -4,10 +4,10 @@ import be.tomcools.dropwizard.websocket.registration.endpointtypes.EndpointProgr
 import be.tomcools.dropwizard.websocket.registration.endpointtypes.EndpointType;
 import org.junit.Test;
 
-import javax.websocket.Endpoint;
-import javax.websocket.*;
-import javax.websocket.server.ServerEndpoint;
-import javax.websocket.server.ServerEndpointConfig;
+import jakarta.websocket.Endpoint;
+import jakarta.websocket.*;
+import jakarta.websocket.server.ServerEndpoint;
+import jakarta.websocket.server.ServerEndpointConfig;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;

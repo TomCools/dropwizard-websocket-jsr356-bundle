@@ -9,8 +9,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import javax.websocket.DeploymentException;
-import javax.websocket.server.ServerContainer;
+import jakarta.websocket.DeploymentException;
+import jakarta.websocket.server.ServerContainer;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;

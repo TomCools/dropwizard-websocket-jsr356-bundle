@@ -1,13 +1,12 @@
 package be.tomcools.dropwizard.websocket;
 
 import be.tomcools.dropwizard.websocket.handling.ServerFactoryWrapper;
-import io.dropwizard.Configuration;
-import io.dropwizard.ConfiguredBundle;
-import io.dropwizard.server.ServerFactory;
-import io.dropwizard.setup.Bootstrap;
-import io.dropwizard.setup.Environment;
+import io.dropwizard.core.Configuration;
+import io.dropwizard.core.ConfiguredBundle;
+import io.dropwizard.core.server.ServerFactory;
+import io.dropwizard.core.setup.Environment;
 
-import javax.websocket.server.ServerEndpointConfig;
+import jakarta.websocket.server.ServerEndpointConfig;
 
 public class WebsocketBundle<T extends Configuration> implements ConfiguredBundle<T> {
     private WebsocketHandlerFactory handlerFactory = new WebsocketHandlerFactory();
@@ -41,8 +40,4 @@ public class WebsocketBundle<T extends Configuration> implements ConfiguredBundl
         }
     }
 
-    @Override
-    public void initialize(Bootstrap bootstrap) {
-        //This method is not used because no initialization logic is required.
-    }
 }

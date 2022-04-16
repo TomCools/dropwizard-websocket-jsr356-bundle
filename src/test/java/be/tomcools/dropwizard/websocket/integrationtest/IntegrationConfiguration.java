@@ -3,10 +3,10 @@ package be.tomcools.dropwizard.websocket.integrationtest;
 import be.tomcools.dropwizard.websocket.WebsocketBundleConfiguration;
 import be.tomcools.dropwizard.websocket.WebsocketConfiguration;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.dropwizard.Configuration;
+import io.dropwizard.core.Configuration;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 
 public class IntegrationConfiguration extends Configuration implements WebsocketBundleConfiguration {
 

@@ -1,8 +1,8 @@
 package be.tomcools.dropwizard.websocket.handling;
 
 import be.tomcools.dropwizard.websocket.WebsocketHandler;
-import io.dropwizard.server.ServerFactory;
-import io.dropwizard.setup.Environment;
+import io.dropwizard.core.server.ServerFactory;
+import io.dropwizard.core.setup.Environment;
 import org.eclipse.jetty.server.Server;
 
 public class ServerFactoryWrapper implements ServerFactory {

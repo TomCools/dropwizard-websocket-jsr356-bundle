@@ -4,8 +4,8 @@ import be.tomcools.dropwizard.websocket.registration.endpointtypes.EndpointAnnot
 import be.tomcools.dropwizard.websocket.registration.endpointtypes.EndpointProgrammaticJava;
 import com.google.common.base.Optional;
 
-import javax.websocket.server.ServerEndpoint;
-import javax.websocket.server.ServerEndpointConfig;
+import jakarta.websocket.server.ServerEndpoint;
+import jakarta.websocket.server.ServerEndpointConfig;
 
 public class EndpointRegistration {
     private Endpoints endpoints = new Endpoints();

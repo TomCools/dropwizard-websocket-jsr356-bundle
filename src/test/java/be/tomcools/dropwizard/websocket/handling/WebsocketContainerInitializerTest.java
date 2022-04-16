@@ -1,9 +1,12 @@
 package be.tomcools.dropwizard.websocket.handling;
 
 import be.tomcools.dropwizard.websocket.WebsocketConfiguration;
+import be.tomcools.dropwizard.websocket.WebsocketHandler;
+import be.tomcools.dropwizard.websocket.registration.EndpointRegistration;
+import be.tomcools.dropwizard.websocket.registration.Endpoints;
 import io.dropwizard.jetty.MutableServletContextHandler;
 import org.eclipse.jetty.server.Server;
-import org.eclipse.jetty.websocket.server.WebSocketUpgradeFilter;
+import org.eclipse.jetty.websocket.servlet.WebSocketUpgradeFilter;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,7 +14,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import javax.servlet.ServletException;
+import jakarta.servlet.ServletException;
 
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.*;
@@ -29,24 +32,18 @@ public class WebsocketContainerInitializerTest {
     @InjectMocks
     private WebsocketContainerInitializer sut;
 
+    @Mock
+    private WebsocketHandler webSocketHandler;
+
     @Before
     public void init() {
         servletContextHandler.setAttribute(WebSocketUpgradeFilter.class.getName(), upgradeFilter);
         when(servletContextHandler.getServer()).thenReturn(server);
     }
 
-    @Test
-    public void canConstructServerContainerForServletHandlerContext() {
-        WebsocketContainer container = sut.initialize(configuration, servletContextHandler);
-
-        assertNotNull(container);
-    }
-
     @Test(expected = IllegalStateException.class)
     public void whenSomethingGoesWrongDuringInitializeThrowsIllegalStateException() {
         when(servletContextHandler.getServer()).thenThrow(ServletException.class);
-        WebsocketContainer container = sut.initialize(configuration, servletContextHandler);
-
-        assertNotNull(container);
+        sut.initialize(servletContextHandler, webSocketHandler);
     }
 }

@@ -1,6 +1,6 @@
 package be.tomcools.dropwizard.websocket;
 
-import io.dropwizard.setup.Environment;
+import io.dropwizard.core.setup.Environment;
 
 public class WebsocketHandlerFactory {
 

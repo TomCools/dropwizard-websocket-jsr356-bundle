@@ -8,8 +8,8 @@ import com.google.common.base.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.websocket.DeploymentException;
-import javax.websocket.server.ServerContainer;
+import jakarta.websocket.DeploymentException;
+import jakarta.websocket.server.ServerContainer;
 
 public class WebsocketContainer {
     private static final Logger LOGGER = LoggerFactory.getLogger(WebsocketContainer.class);
