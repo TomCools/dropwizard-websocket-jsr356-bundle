@@ -4,7 +4,7 @@
 
     <groupId>be.tomcools</groupId>
     <artifactId>dropwizard-websocket-jee7-bundle</artifactId>
-    <version>2.0.1-SNAPSHOT</version>
+    <version>4.0.0-beta.1</version>
     <packaging>jar</packaging>
 
     <name>dropwizard-websocket-jee7-bundle</name>
@@ -34,21 +34,26 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <dropwizard.version>1.0.0</dropwizard.version>
-        <jetty.version>9.3.9.v20160517</jetty.version>
+        <dropwizard.version>4.0.0-beta.1</dropwizard.version>
     </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>io.dropwizard</groupId>
+                <artifactId>dropwizard-dependencies</artifactId>
+                <version>${dropwizard.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
         <dependency>
-            <groupId>javax.websocket</groupId>
-            <artifactId>javax.websocket-api</artifactId>
-            <version>1.1</version>
-        </dependency>
-
-        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.16.4</version>
+            <version>1.18.2</version>
             <scope>provided</scope>
         </dependency>
 
@@ -56,12 +61,10 @@
         <dependency>
             <groupId>io.dropwizard</groupId>
             <artifactId>dropwizard-core</artifactId>
-            <version>${dropwizard.version}</version>
         </dependency>
         <dependency>
             <groupId>io.dropwizard</groupId>
             <artifactId>dropwizard-testing</artifactId>
-            <version>${dropwizard.version}</version>
             <scope>test</scope>
         </dependency>
 
@@ -69,7 +72,13 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.11</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <version>1.9.5</version>
             <scope>test</scope>
         </dependency>
 
@@ -84,14 +93,12 @@
         <!-- Jetty -->
         <dependency>
             <groupId>org.eclipse.jetty.websocket</groupId>
-            <artifactId>javax-websocket-server-impl</artifactId>
-            <version>${jetty.version}</version>
+            <artifactId>websocket-jakarta-server</artifactId>
         </dependency>
         <!-- To run javax.websocket client -->
         <dependency>
             <groupId>org.eclipse.jetty.websocket</groupId>
-            <artifactId>javax-websocket-client-impl</artifactId>
-            <version>${jetty.version}</version>
+            <artifactId>websocket-jakarta-client</artifactId>
         </dependency>
     </dependencies>
 

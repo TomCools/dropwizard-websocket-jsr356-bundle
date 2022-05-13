@@ -4,11 +4,11 @@ import be.tomcools.dropwizard.websocket.WebsocketBundle;
 import be.tomcools.dropwizard.websocket.integrationtest.annotatedjavaee.PingPongServerEndpoint;
 import be.tomcools.dropwizard.websocket.integrationtest.programmaticjavaee.ProgrammaticServerEndpoint;
 import com.codahale.metrics.health.HealthCheck;
-import io.dropwizard.Application;
-import io.dropwizard.setup.Bootstrap;
-import io.dropwizard.setup.Environment;
+import io.dropwizard.core.Application;
+import io.dropwizard.core.setup.Bootstrap;
+import io.dropwizard.core.setup.Environment;
 
-import javax.websocket.server.ServerEndpointConfig;
+import jakarta.websocket.server.ServerEndpointConfig;
 import java.util.concurrent.CountDownLatch;
 
 public class IntegrationTestApplication extends Application<IntegrationConfiguration> {

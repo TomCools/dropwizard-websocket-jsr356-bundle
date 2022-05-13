@@ -1,12 +1,10 @@
 package be.tomcools.dropwizard.websocket;
 
-import be.tomcools.dropwizard.websocket.handling.WebsocketContainer;
 import be.tomcools.dropwizard.websocket.handling.WebsocketContainerInitializer;
 import be.tomcools.dropwizard.websocket.registration.EndpointRegistration;
 import be.tomcools.dropwizard.websocket.registration.Endpoints;
-import io.dropwizard.Configuration;
-import io.dropwizard.jetty.MutableServletContextHandler;
-import io.dropwizard.setup.Environment;
+import io.dropwizard.core.Configuration;
+import io.dropwizard.core.setup.Environment;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,9 +12,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import javax.websocket.*;
-import javax.websocket.server.ServerEndpoint;
-import javax.websocket.server.ServerEndpointConfig;
+import jakarta.websocket.*;
+import jakarta.websocket.server.ServerEndpoint;
+import jakarta.websocket.server.ServerEndpointConfig;
 
 import static org.mockito.Mockito.*;
 
@@ -38,9 +36,6 @@ public class WebsocketHandlerTest {
     private WebsocketContainerInitializer containerInitializer;
 
     @Mock
-    private WebsocketContainer container;
-
-    @Mock
     private Endpoints endpoints;
 
     @InjectMocks
@@ -48,7 +43,6 @@ public class WebsocketHandlerTest {
 
     @Before
     public void init() {
-        when(containerInitializer.initialize(any(WebsocketConfiguration.class), any(MutableServletContextHandler.class))).thenReturn(container);
         when(endpointRegistration.getRegisteredEndpoints()).thenReturn(endpoints);
     }
 
@@ -76,14 +70,7 @@ public class WebsocketHandlerTest {
     public void whenInitializeIsCalled_InitializesWebsocketContainer() {
         sut.initialize();
 
-        verify(containerInitializer).initialize(wsConfiguration, environment.getApplicationContext());
-    }
-
-    @Test
-    public void whenInitializeIsCalled_addsRegisteredEndpointsToWebsocketContainer() {
-        sut.initialize();
-
-        verify(container).registerEndpoints(endpoints);
+        verify(containerInitializer).initialize(environment.getApplicationContext(), sut);   
     }
 
     @ServerEndpoint("/chat")

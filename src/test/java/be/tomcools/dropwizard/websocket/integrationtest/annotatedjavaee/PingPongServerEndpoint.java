@@ -1,12 +1,9 @@
 package be.tomcools.dropwizard.websocket.integrationtest.annotatedjavaee;
 
-import javax.websocket.*;
-import javax.websocket.server.ServerEndpoint;
+import jakarta.websocket.*;
+import jakarta.websocket.server.ServerEndpoint;
 import java.io.IOException;
-import java.util.Set;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
 
 @ServerEndpoint("/pingpong")
 public class PingPongServerEndpoint {

@@ -1,6 +1,6 @@
 package be.tomcools.dropwizard.websocket;
 
-import io.dropwizard.setup.Environment;
+import io.dropwizard.core.setup.Environment;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

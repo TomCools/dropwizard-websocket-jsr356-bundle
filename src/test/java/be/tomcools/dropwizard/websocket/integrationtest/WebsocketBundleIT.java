@@ -4,10 +4,10 @@ import be.tomcools.dropwizard.websocket.integrationtest.annotatedjavaee.PingPong
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.websocket.ContainerProvider;
-import javax.websocket.DeploymentException;
-import javax.websocket.Session;
-import javax.websocket.WebSocketContainer;
+import jakarta.websocket.ContainerProvider;
+import jakarta.websocket.DeploymentException;
+import jakarta.websocket.Session;
+import jakarta.websocket.WebSocketContainer;
 import java.io.IOException;
 import java.net.URI;
 import java.util.concurrent.TimeUnit;
