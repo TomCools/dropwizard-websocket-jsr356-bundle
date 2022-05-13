@@ -1,6 +1,5 @@
 package be.tomcools.dropwizard.websocket;
 
-import org.eclipse.jetty.websocket.jakarta.server.config.JakartaWebSocketServletContainerInitializer;
 import be.tomcools.dropwizard.websocket.handling.WebsocketContainer;
 import be.tomcools.dropwizard.websocket.handling.WebsocketContainerInitializer;
 import be.tomcools.dropwizard.websocket.registration.EndpointRegistration;
@@ -9,12 +8,13 @@ import jakarta.servlet.ServletContext;
 import jakarta.websocket.DeploymentException;
 import jakarta.websocket.server.ServerContainer;
 import jakarta.websocket.server.ServerEndpointConfig;
+import org.eclipse.jetty.websocket.jakarta.server.config.JakartaWebSocketServletContainerInitializer;
 
 public class WebsocketHandler implements JakartaWebSocketServletContainerInitializer.Configurator {
-    private EndpointRegistration endpointRegistration;
+    private final EndpointRegistration endpointRegistration;
     private final WebsocketConfiguration configuration;
-    private Environment environment;
-    private WebsocketContainerInitializer containerInitializer;
+    private final Environment environment;
+    private final WebsocketContainerInitializer containerInitializer;
 
     public WebsocketHandler(WebsocketConfiguration configuration, Environment environment) {
         this(configuration, environment, new EndpointRegistration(), new WebsocketContainerInitializer());
@@ -40,7 +40,7 @@ public class WebsocketHandler implements JakartaWebSocketServletContainerInitial
     }
 
     @Override
-    public void accept(ServletContext servletContext, ServerContainer serverContainer) throws DeploymentException {
+    public void accept(ServletContext servletContext, ServerContainer serverContainer) {
         WebsocketContainer container = new WebsocketContainer(configuration, serverContainer);
         container.registerEndpoints(endpointRegistration.getRegisteredEndpoints());
     }

@@ -4,37 +4,31 @@ import be.tomcools.dropwizard.websocket.WebsocketConfiguration;
 import be.tomcools.dropwizard.websocket.registration.Endpoint;
 import be.tomcools.dropwizard.websocket.registration.Endpoints;
 import be.tomcools.dropwizard.websocket.registration.endpointtypes.EndpointProgrammaticJava;
-import com.google.common.base.Optional;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import jakarta.websocket.DeploymentException;
 import jakarta.websocket.server.ServerContainer;
+import lombok.extern.slf4j.Slf4j;
 
+import java.util.Optional;
+
+@Slf4j
 public class WebsocketContainer {
-    private static final Logger LOGGER = LoggerFactory.getLogger(WebsocketContainer.class);
 
-    private ServerContainer serverContainer;
+    private final ServerContainer serverContainer;
 
     public WebsocketContainer(WebsocketConfiguration configuration, ServerContainer serverContainer) {
         this.serverContainer = serverContainer;
 
-        Optional<Long> longVal = Optional.fromNullable(configuration.getMaxSessionIdleTimeout());
-        if (longVal.isPresent()) {
-            this.serverContainer.setDefaultMaxSessionIdleTimeout(longVal.get());
-        }
-        longVal = Optional.fromNullable(configuration.getAsyncSendTimeout());
-        if (longVal.isPresent()) {
-            this.serverContainer.setAsyncSendTimeout(longVal.get());
-        }
-        Optional<Integer> intVal = Optional.fromNullable(configuration.getMaxBinaryMessageBufferSize());
-        if (intVal.isPresent()) {
-            this.serverContainer.setDefaultMaxBinaryMessageBufferSize(intVal.get());
-        }
-        intVal = Optional.fromNullable(configuration.getMaxTextMessageBufferSize());
-        if (intVal.isPresent()) {
-            this.serverContainer.setDefaultMaxTextMessageBufferSize(intVal.get());
-        }
+        Optional.ofNullable(configuration.getMaxSessionIdleTimeout())
+                .ifPresent(this.serverContainer::setDefaultMaxSessionIdleTimeout);
+
+        Optional.ofNullable(configuration.getAsyncSendTimeout())
+                .ifPresent(this.serverContainer::setAsyncSendTimeout);
+
+        Optional.ofNullable(configuration.getMaxBinaryMessageBufferSize())
+                .ifPresent(this.serverContainer::setDefaultMaxBinaryMessageBufferSize);
+
+        Optional.ofNullable(configuration.getMaxTextMessageBufferSize())
+                .ifPresent(this.serverContainer::setDefaultMaxTextMessageBufferSize);
     }
 
     public void registerEndpoints(final Endpoints endpoints) {
@@ -45,7 +39,7 @@ public class WebsocketContainer {
                 register(endpoint);
                 succesfullyAdded.add(endpoint);
             } catch (DeploymentException e) {
-                LOGGER.error("Could not add websocket endpoint {} to the deployment.", endpoint, e);
+                log.error("Could not add websocket endpoint {} to the deployment.", endpoint, e);
             }
         }
         logRegisteredEndpoints(succesfullyAdded);
@@ -65,7 +59,7 @@ public class WebsocketContainer {
             }
         }
 
-        LOGGER.info(endpointsAdded.toString());
+        log.info(endpointsAdded.toString());
 
     }
 

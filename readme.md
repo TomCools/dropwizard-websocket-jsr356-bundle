@@ -11,23 +11,29 @@ This repository contains a Bundle to be used with Dropwizard.
 For more information about Dropwizard, please visit: [dropwizard.io](http://www.dropwizard.io).
 
 The goal of the bundle was to add support for the JSR 356 Websocket specification.
-(Lookup since when Jetty supports this functionality).
+For some reason, Dropwizard doesn't support this out of the box.
 
 How does the bundle work?
 ---
+
+We are currently preparing to re-launch this bundle for Dropwizard 4 and this should be considered a **BETA** version.
+The baseline for this version is *Java 11*, which is also the baseline for Dropwizard 4.
+
 Add the maven dependency: 
+
+    <dependency>
+      <groupId>be.tomcools</groupId>
+      <artifactId>dropwizard-websocket-jsr356-bundle</artifactId>
+      <version>4.0.0-beta.1</version>
+    </dependency>
+    
+This project used to contain an implementation for Dropwizard 2.x, based on Java 8.
+While we are deprecating that and no longer supporting it, it's still available.
 
     <dependency>
       <groupId>be.tomcools</groupId>
       <artifactId>dropwizard-websocket-jee7-bundle</artifactId>
       <version>2.0.0</version>
-    </dependency>
-    
-The version 2.0.0 does no longer support Java 7. Please use the older dependency or upgrade to Java 8
-    <dependency>
-      <groupId>be.tomcools</groupId>
-      <artifactId>dropwizard-websocket-jee7-bundle</artifactId>
-      <version>1.1.0</version>
     </dependency>
 
 Add the WebsocketBundle object to the Application.class and add the Endpoint classes you want to load:

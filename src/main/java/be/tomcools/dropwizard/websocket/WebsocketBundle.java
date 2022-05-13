@@ -5,11 +5,10 @@ import io.dropwizard.core.Configuration;
 import io.dropwizard.core.ConfiguredBundle;
 import io.dropwizard.core.server.ServerFactory;
 import io.dropwizard.core.setup.Environment;
-
 import jakarta.websocket.server.ServerEndpointConfig;
 
 public class WebsocketBundle<T extends Configuration> implements ConfiguredBundle<T> {
-    private WebsocketHandlerFactory handlerFactory = new WebsocketHandlerFactory();
+    private final WebsocketHandlerFactory handlerFactory = new WebsocketHandlerFactory();
     final static WebsocketConfiguration DEFAULT_CONFIG = new WebsocketConfiguration();
 
     private WebsocketHandler handler;

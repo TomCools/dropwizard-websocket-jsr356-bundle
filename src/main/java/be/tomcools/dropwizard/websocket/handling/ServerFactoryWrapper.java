@@ -6,8 +6,8 @@ import io.dropwizard.core.setup.Environment;
 import org.eclipse.jetty.server.Server;
 
 public class ServerFactoryWrapper implements ServerFactory {
-    private WebsocketHandler handler;
-    private ServerFactory serverFactory;
+    private final WebsocketHandler handler;
+    private final ServerFactory serverFactory;
 
     public ServerFactoryWrapper(ServerFactory serverFactory, WebsocketHandler handler) {
         this.serverFactory = serverFactory;

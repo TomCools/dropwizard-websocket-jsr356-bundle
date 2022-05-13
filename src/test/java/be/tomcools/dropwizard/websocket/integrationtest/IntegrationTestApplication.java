@@ -7,13 +7,10 @@ import com.codahale.metrics.health.HealthCheck;
 import io.dropwizard.core.Application;
 import io.dropwizard.core.setup.Bootstrap;
 import io.dropwizard.core.setup.Environment;
-
 import jakarta.websocket.server.ServerEndpointConfig;
-import java.util.concurrent.CountDownLatch;
 
 public class IntegrationTestApplication extends Application<IntegrationConfiguration> {
     private WebsocketBundle websocket = new WebsocketBundle();
-    CountDownLatch initLatch = new CountDownLatch(1);
 
     @Override
     public void initialize(Bootstrap<IntegrationConfiguration> bootstrap) {
@@ -37,7 +34,5 @@ public class IntegrationTestApplication extends Application<IntegrationConfigura
                 return Result.healthy();
             }
         });
-
-        initLatch.countDown();
     }
 }

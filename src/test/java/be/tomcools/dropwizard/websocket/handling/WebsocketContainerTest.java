@@ -3,14 +3,13 @@ package be.tomcools.dropwizard.websocket.handling;
 import be.tomcools.dropwizard.websocket.WebsocketConfiguration;
 import be.tomcools.dropwizard.websocket.registration.Endpoints;
 import be.tomcools.dropwizard.websocket.registration.endpointtypes.EndpointAnnotatedJava;
+import jakarta.websocket.DeploymentException;
+import jakarta.websocket.server.ServerContainer;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-
-import jakarta.websocket.DeploymentException;
-import jakarta.websocket.server.ServerContainer;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;

@@ -1,13 +1,13 @@
 package be.tomcools.dropwizard.websocket.registration;
 
-import com.google.common.base.Optional;
 
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Optional;
 import java.util.Set;
 
 public class Endpoints implements Iterable<Endpoint> {
-    private Set<Endpoint> endpointList = new HashSet<>();
+    private final Set<Endpoint> endpointList = new HashSet<>();
 
     public void add(Endpoint endpoint) {
         endpointList.add(endpoint);
@@ -16,10 +16,10 @@ public class Endpoints implements Iterable<Endpoint> {
     public Optional<Endpoint> endpointForPath(String path) {
         for (Endpoint endpoint : endpointList) {
             if (endpoint.getPath().equals(path)) {
-                return Optional.fromNullable(endpoint);
+                return Optional.of(endpoint);
             }
         }
-        return Optional.absent();
+        return Optional.empty();
     }
 
     @Override

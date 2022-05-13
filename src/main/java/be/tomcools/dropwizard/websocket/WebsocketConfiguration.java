@@ -1,7 +1,11 @@
 package be.tomcools.dropwizard.websocket;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public class WebsocketConfiguration {
 
     @JsonProperty
@@ -12,22 +16,5 @@ public class WebsocketConfiguration {
     private Long maxSessionIdleTimeout;
     @JsonProperty
     private Integer maxBinaryMessageBufferSize;
-
-
-    public Long getAsyncSendTimeout() {
-        return asyncSendTimeout;
-    }
-
-    public Integer getMaxTextMessageBufferSize() {
-        return maxTextMessageBufferSize;
-    }
-
-    public Long getMaxSessionIdleTimeout() {
-        return maxSessionIdleTimeout;
-    }
-
-    public Integer getMaxBinaryMessageBufferSize() {
-        return maxBinaryMessageBufferSize;
-    }
 
 }

@@ -2,13 +2,13 @@ package be.tomcools.dropwizard.websocket.registration;
 
 import be.tomcools.dropwizard.websocket.registration.endpointtypes.EndpointAnnotatedJava;
 import be.tomcools.dropwizard.websocket.registration.endpointtypes.EndpointProgrammaticJava;
-import com.google.common.base.Optional;
-
 import jakarta.websocket.server.ServerEndpoint;
 import jakarta.websocket.server.ServerEndpointConfig;
 
+import java.util.Optional;
+
 public class EndpointRegistration {
-    private Endpoints endpoints = new Endpoints();
+    private final Endpoints endpoints = new Endpoints();
 
     public void add(Class<?> endpointClass) {
         String endpointPath = determineAnnotatedEndpointPath(endpointClass);

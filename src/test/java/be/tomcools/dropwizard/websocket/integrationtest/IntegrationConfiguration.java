@@ -4,7 +4,6 @@ import be.tomcools.dropwizard.websocket.WebsocketBundleConfiguration;
 import be.tomcools.dropwizard.websocket.WebsocketConfiguration;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.dropwizard.core.Configuration;
-
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 
