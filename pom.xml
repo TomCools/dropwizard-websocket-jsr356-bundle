@@ -34,8 +34,8 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <dropwizard.version>1.0.0</dropwizard.version>
-        <jetty.version>9.3.9.v20160517</jetty.version>
+        <dropwizard.version>2.1.1</dropwizard.version>
+        <jetty.version>9.4.48.v20220622</jetty.version>
     </properties>
 
     <dependencies>
@@ -48,7 +48,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.16.4</version>
+            <version>1.18.24</version>
             <scope>provided</scope>
         </dependency>
 
@@ -70,6 +70,14 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.11</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Mockito -->
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>4.6.1</version>
             <scope>test</scope>
         </dependency>
 

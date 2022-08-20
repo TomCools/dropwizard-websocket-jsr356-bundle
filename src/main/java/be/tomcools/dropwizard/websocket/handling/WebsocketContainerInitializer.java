@@ -9,7 +9,7 @@ public class WebsocketContainerInitializer {
     public WebsocketContainer initialize(WebsocketConfiguration configuration,
                                          MutableServletContextHandler contextHandler) {
         try {
-            return new WebsocketContainer(configuration, WebSocketServerContainerInitializer.configureContext(contextHandler));
+            return new WebsocketContainer(configuration, WebSocketServerContainerInitializer.initialize(contextHandler));
         } catch (Exception e) {
             throw new IllegalStateException("Could not initialize contexthandler to enable Websockets", e);
         }
