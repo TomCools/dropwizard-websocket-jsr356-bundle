@@ -4,18 +4,18 @@ import be.tomcools.dropwizard.websocket.WebsocketHandler;
 import io.dropwizard.core.server.ServerFactory;
 import io.dropwizard.core.setup.Environment;
 import org.eclipse.jetty.server.Server;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Mockito.*;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class ServerFactoryWrapperTest {
     private final Environment environment = mock(Environment.class, RETURNS_DEEP_STUBS);
 
@@ -29,9 +29,9 @@ public class ServerFactoryWrapperTest {
     @InjectMocks
     private ServerFactoryWrapper wrapper;
 
-    @Before
+    @BeforeEach
     public void init() {
-        when(serverFactory.build(environment)).thenReturn(server);
+        lenient().when(serverFactory.build(environment)).thenReturn(server);
     }
 
     @Test

@@ -6,7 +6,8 @@ import jakarta.websocket.Endpoint;
 import jakarta.websocket.*;
 import jakarta.websocket.server.ServerEndpoint;
 import jakarta.websocket.server.ServerEndpointConfig;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -53,15 +54,18 @@ public class EndpointRegistrationTest {
         }
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void ifSuppliedClassDoesnotHaveServerEndpointAnnotationThrowsIllegalArgumentException() {
-        registration.add(Object.class);
+        Assertions.assertThrows(IllegalArgumentException.class, () ->
+                registration.add(Object.class));
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void addingTwoEndpointsWithSamePathCausesException() {
         registration.add(AnnotatedEndpoint.class);
-        registration.add(AnnotatedEndpoint.class);
+        Assertions.assertThrows(IllegalStateException.class,
+                () -> registration.add(AnnotatedEndpoint.class));
+
     }
 
     @ServerEndpoint("/chat")
