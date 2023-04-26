@@ -5,16 +5,16 @@ import be.tomcools.dropwizard.websocket.registration.Endpoints;
 import be.tomcools.dropwizard.websocket.registration.endpointtypes.EndpointAnnotatedJava;
 import jakarta.websocket.DeploymentException;
 import jakarta.websocket.server.ServerContainer;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class WebsocketContainerTest {
 
     @Mock

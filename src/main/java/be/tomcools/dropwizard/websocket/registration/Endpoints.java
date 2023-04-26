@@ -1,13 +1,10 @@
 package be.tomcools.dropwizard.websocket.registration;
 
 
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 public class Endpoints implements Iterable<Endpoint> {
-    private final Set<Endpoint> endpointList = new HashSet<>();
+    private final List<Endpoint> endpointList = new ArrayList<>();
 
     public void add(Endpoint endpoint) {
         endpointList.add(endpoint);
