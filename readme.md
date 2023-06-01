@@ -1,7 +1,7 @@
 Websocket (JSR 356) bundle for Dropwizard
 ==========
 [![Latest Build](https://github.com/TomCools/dropwizard-websocket-jsr356-bundle/actions/workflows/github-build-maven.yml/badge.svg?branch=main)](https://github.com/TomCools/dropwizard-websocket-jsr356-bundle/actions/workflows/github-build-maven.yml)
-[![Latest Release](https://img.shields.io/maven-central/v/be.tomcools/dropwizard-websocket-jsr356-bundle)](http://mvnrepository.com/artifact/be.tomcools/dropwizard-websocket-jee7-bundle)
+[![Latest Release](https://img.shields.io/maven-central/v/be.tomcools/dropwizard-websocket-jsr356-bundle)](http://mvnrepository.com/artifact/be.tomcools/dropwizard-websocket-jsr356-bundle)
 [![License](https://img.shields.io/badge/License-Apache%202-blue.svg)](https://github.com/TomCools/dropwizard-websocket-jee7-bundle/blob/master/LICENSE)
 
 *Adding some Websocket-magic to Dropwizard.*
