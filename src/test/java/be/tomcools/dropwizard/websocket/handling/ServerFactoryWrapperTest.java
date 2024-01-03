@@ -5,7 +5,7 @@ import io.dropwizard.core.server.ServerFactory;
 import io.dropwizard.core.setup.Environment;
 import org.eclipse.jetty.server.Server;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;

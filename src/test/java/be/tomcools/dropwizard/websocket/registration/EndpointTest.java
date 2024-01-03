@@ -3,7 +3,7 @@ package be.tomcools.dropwizard.websocket.registration;
 import be.tomcools.dropwizard.websocket.registration.endpointtypes.EndpointAnnotatedJava;
 import be.tomcools.dropwizard.websocket.registration.endpointtypes.EndpointProgrammaticJava;
 import nl.jqno.equalsverifier.EqualsVerifier;
-import org.junit.jupiter.api.Test;;
+import org.junit.jupiter.api.Test;
 
 public class EndpointTest {
 
