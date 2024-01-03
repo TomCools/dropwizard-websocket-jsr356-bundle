@@ -4,7 +4,7 @@
 
     <groupId>be.tomcools</groupId>
     <artifactId>dropwizard-websocket-jsr356-bundle</artifactId>
-    <version>4.0.1-SNAPSHOT</version>
+    <version>5.0.0-alpha.1</version>
     <packaging>jar</packaging>
 
     <name>dropwizard-websocket-jsr356-bundle</name>
@@ -34,8 +34,8 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <dropwizard.version>4.0.0</dropwizard.version>
-        <java.version>11</java.version>
+        <dropwizard.version>5.0.0-alpha.1</dropwizard.version>
+        <java.version>17</java.version>
     </properties>
 
     <dependencyManagement>
@@ -79,7 +79,6 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-junit-jupiter</artifactId>
-            <version>4.8.1</version>
             <scope>test</scope>
         </dependency>
 
@@ -105,13 +104,13 @@
 
         <!-- Jetty -->
         <dependency>
-            <groupId>org.eclipse.jetty.websocket</groupId>
-            <artifactId>websocket-jakarta-server</artifactId>
+            <groupId>org.eclipse.jetty.ee10.websocket</groupId>
+            <artifactId>jetty-ee10-websocket-jakarta-server</artifactId>
         </dependency>
         <!-- To run javax.websocket client -->
         <dependency>
-            <groupId>org.eclipse.jetty.websocket</groupId>
-            <artifactId>websocket-jakarta-client</artifactId>
+            <groupId>org.eclipse.jetty.ee10.websocket</groupId>
+            <artifactId>jetty-ee10-websocket-jakarta-client</artifactId>
         </dependency>
     </dependencies>
 

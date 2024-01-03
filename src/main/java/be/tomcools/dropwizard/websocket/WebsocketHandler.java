@@ -5,10 +5,9 @@ import be.tomcools.dropwizard.websocket.handling.WebsocketContainerInitializer;
 import be.tomcools.dropwizard.websocket.registration.EndpointRegistration;
 import io.dropwizard.core.setup.Environment;
 import jakarta.servlet.ServletContext;
-import jakarta.websocket.DeploymentException;
 import jakarta.websocket.server.ServerContainer;
 import jakarta.websocket.server.ServerEndpointConfig;
-import org.eclipse.jetty.websocket.jakarta.server.config.JakartaWebSocketServletContainerInitializer;
+import org.eclipse.jetty.ee10.websocket.jakarta.server.config.JakartaWebSocketServletContainerInitializer;
 
 public class WebsocketHandler implements JakartaWebSocketServletContainerInitializer.Configurator {
     private final EndpointRegistration endpointRegistration;

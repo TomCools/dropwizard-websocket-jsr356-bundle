@@ -1,11 +1,11 @@
 package be.tomcools.dropwizard.websocket.handling;
 
 
-import io.dropwizard.jetty.MutableServletContextHandler;
-import org.eclipse.jetty.websocket.jakarta.server.config.JakartaWebSocketServletContainerInitializer;
+import org.eclipse.jetty.ee10.servlet.ServletContextHandler;
+import org.eclipse.jetty.ee10.websocket.jakarta.server.config.JakartaWebSocketServletContainerInitializer;
 
 public class WebsocketContainerInitializer {
-    public void initialize(MutableServletContextHandler contextHandler,
+    public void initialize(ServletContextHandler contextHandler,
                            JakartaWebSocketServletContainerInitializer.Configurator configurator) {
         try {
             JakartaWebSocketServletContainerInitializer.configure(contextHandler, configurator);
